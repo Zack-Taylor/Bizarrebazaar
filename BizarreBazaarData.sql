@@ -12,6 +12,31 @@ values('James', 'Baldwin', getdate(), 1, 'JBaldwin', 'jamesbaldwin@gmail.com', '
 ('Professor', 'Oak', getdate(), 1, 'Professor Oak', 'oak@gmail.com', 'pokemonrmypassion'),
 ('Banjo', 'Kazooie', getdate(), 1, 'BearAndBird', 'bkazooie@gmail.com', 'getjiggywithit')
 
+insert into ProductType ([Name])
+values('Misc'),
+('Clothing'),
+('History'),
+('Weapon'),
+('Edible'),
+('Jewelry'),
+('Art')
+
+insert into PaymentType ([Name])
+values('Visa'),
+('MasterCard'),
+('PayPal')
+
+insert into Payment (PaymentTypeId, AcctNumber, UserId)
+values(1, 0000011111, 1)
+
+insert into [Order] (UserId, OrderTotal, InvoiceDate, IsComplete, PaymentId)
+values(1, 10000.00, getdate(), 1, 1)
+
+
+
+insert into LineItem (OrderId, ProductId, Quantity)
+values(1, 46, 2)
+
 
 insert into Product (ProductTypeId, Price, Title, [Description], Quantity, UserId, DateAdded)
 values(4, 250000.00, 'Cupids Bow & Arrow', 'Tried of dating apps? One of Cupid''s arrows fired from his bow will cause the person struck to fall in love.', 20, 1, getdate()),
@@ -65,25 +90,4 @@ values(4, 250000.00, 'Cupids Bow & Arrow', 'Tried of dating apps? One of Cupid''
 (1, 500, 'Ocarina', 'Small oval whistle made from a dark hollow wood. Makes a high, but beautiful sound. You feel yourself being pulled into another world.', 3, 5, getdate()),
 (4, 500, 'Leia''s Lightsaber', 'A sleek silver-handled lightsaber said to have once beloned to Master Leia Organa Solo. When the blade ignites it hums happily and glows a clear emerald green. You sense a disturbance in the Force.', 1, 7, getdate())
 
-insert into PaymentType ([Name])
-values('Visa'),
-('MasterCard'),
-('PayPal')
 
-insert into Payment (PaymentTypeId, AcctNumber, UserId)
-values(1, 0000011111, 1)
-
-insert into [Order] (UserId, OrderTotal, InvoiceDate, IsComplete, PaymentId)
-values(1, 10000.00, getdate(), 1, 1)
-
-insert into ProductType ([Name])
-values('Misc'),
-('Clothing'),
-('History'),
-('Weapon'),
-('Edible'),
-('Jewelry'),
-('Art')
-
-insert into LineItem (OrderId, ProductId, Quantity)
-values(1, 46, 2)
