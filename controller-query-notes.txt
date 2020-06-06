@@ -1,0 +1,61 @@
+Allow a user to register for the site -  AddUser() - insert into User
+
+Customer can view their profile information - GetUserById(int id) - select * from [User] where id = @id
+
+Search for seller by text - GetUserByQuery(string query) - select * from [User]
+							where firstname + lastname like @query
+							and isseller = 1
+
+Customer should be able to view their completed orders,
+Customer should be able to view order history,
+Customer should be able to view product information when viewing order details:
+
+- GetCompletedOrderesByUserId(int userId) -
+ 
+select [order].id as orderId, [user].username as Seller, [order].userId, product.title, product.imageurl, [order].invoicedate as dateordered, product.price, lineitem.quantity, paymenttype.[name] as paymenttype, product.price * lineitem.quantity as producttotal
+from lineitem
+join product on product.id = productId
+join [user] on [user].id = product.userId
+join [order] on [order].id = orderId
+join payment on payment.id = [order].paymentid
+join paymenttype on paymenttype.id = payment.paymenttypeId
+where iscomplete = 1 and [order].userId = 1
+order by [order].id
+
+Break up into individual order arrays in JS.
+
+User can view all product categories, next to the category name, the number of products in that category will be displayed:
+
+- GetProductCategories() -
+
+select producttype.[name], count(*) as productcount
+from product
+join producttype on product.producttypeid = producttype.id
+group by producttype.[name]
+
+And the first three products in the category will be displayed beneath each category, that are hyperlinks to the product detail:
+
+- GetTopThreeProductsByType(string producttype) -
+(Loop over categories and run the above method with each type passed in)
+
+select top(3) product.[title], producttype.[name]
+from product
+join producttype on producttype.id = product.producttypeid
+where producttype.[name] = @producttype
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
