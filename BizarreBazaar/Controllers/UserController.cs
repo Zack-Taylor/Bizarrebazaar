@@ -71,17 +71,5 @@ namespace BizarreBazaar.Controllers
             return Ok(existingUser);
         }
 
-        [HttpGet("completedOrder/{uid}")]
-        public IActionResult GetCompletedOrder(int uid)
-        {
-            var orders = _repository.GetCompletedOrdersByUserId(uid);
-            if (orders == null)
-            {
-                return NotFound("Sorry, but you don't have any completed orders.");
-            }
-
-            return Ok(orders);
-        }
-
     }
 }
