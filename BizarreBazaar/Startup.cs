@@ -29,6 +29,7 @@ namespace BizarreBazaar
             services.AddControllers();
             services.AddTransient<UserRepo>();
             services.AddTransient<ProductRepo>();
+            services.AddTransient<OrderRepo>();
             services.AddSingleton<IConfiguration>(Configuration);
         }
 
