@@ -19,13 +19,23 @@ namespace BizarreBazaar.Controllers
             _repository = repository;
         }
 
-        //api/product
         [HttpGet]
         public IActionResult GetProducts()
         {
             var allProducts = _repository.GetAllProducts();
 
             return Ok(allProducts);
+        }
+
+        [HttpGet("productId/{id}")]
+        public IActionResult GetProductById(int id)
+        {
+            var product = _repository.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound("That product does not exist");
+            }
+            return Ok(product);
         }
 
         [HttpGet("userId/{uid}")]
@@ -36,9 +46,30 @@ namespace BizarreBazaar.Controllers
             {
                 return NotFound("No products exist for this seller.");
             }
-
             return Ok(products);
         }
+
+        [HttpPut("deleteById/{id}")]
+        public IActionResult DeleteProductById(int id)
+        {
+            var rowsAffected = _repository.DeleteProductById(id);
+            return Ok($"{rowsAffected} rows affected");
+        }
+
+
+        [HttpGet("searchProduct/{search}")]
+
+        public IActionResult GetSearchedProducts(string search)
+        {
+            var searchedItem = _repository.GetSearchedProduct(search);
+            if (searchedItem == null)
+            {
+                return NotFound("Sorry but that item doesn't exist.");
+            }
+
+            return Ok(searchedItem);
+        }
+       
 
     }
 }
