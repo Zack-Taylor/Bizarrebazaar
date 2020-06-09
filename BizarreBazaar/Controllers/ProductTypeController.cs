@@ -10,7 +10,7 @@ namespace BizarreBazaar.Controllers
     public class ProductTypeController : ControllerBase
     {
 
-        [HttpGet("{category}")]
+        [HttpGet("{productType}")]
         public IActionResult GetProductByProductType(string category)
         {
             var repo = new ProductTypeRepo();

@@ -10,7 +10,7 @@ namespace BizarreBazaar.DataAccess
 {
     public class ProductTypeRepo
     {
-        const string ConnectionString = "Server=localhost;Database=CandyMarket;Trusted_Connection=True;";
+        const string ConnectionString = "Server=localhost;Database=BizarreBazaar;Trusted_Connection=True;";
         public ProductType GetProductByProductType(string category)
         {
             var sql = @"select producttype.[name], count(*) as productcount
