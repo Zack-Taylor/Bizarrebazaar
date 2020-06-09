@@ -57,7 +57,7 @@ namespace BizarreBazaar.Controllers
         }
 
 
-        [HttpGet()]
+        [HttpGet("searchProduct/{search}")]
 
         public IActionResult GetSearchedProducts(string search)
         {
