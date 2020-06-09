@@ -93,5 +93,21 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        public IEnumerable<User> GetSearchedUser(string searchUser)
+        {
+
+            var sql = @"
+                        select * from [User]
+                        where [User].UserName like '%' + @searchUser + '%' AND acctActive = 1
+                    ";
+
+            var parameters = new { SearchUser = searchUser };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<User>(sql, parameters);
+            }
+
+        }
+
     }
 }

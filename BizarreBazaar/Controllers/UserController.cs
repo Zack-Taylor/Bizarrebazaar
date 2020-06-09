@@ -84,5 +84,19 @@ namespace BizarreBazaar.Controllers
             return NotFound("Sorry, this user does not exist.");
 
         }
+
+        [HttpGet("searchUser/{search}")]
+
+        public IActionResult GetSearchedUsers(string search)
+        {
+            var searchedUser = _repository.GetSearchedUser(search);
+            if (searchedUser == null)
+            {
+                return NotFound("Sorry but that user doesn't exist.");
+            }
+
+            return Ok(searchedUser);
+        }
+
     }
 }
