@@ -30,7 +30,7 @@ namespace BizarreBazaar.Controllers
             return Ok(allUsers);
         }
 
-        [HttpGet("{uid}/")]
+        [HttpGet("userId/{uid}")]
 
         public IActionResult GetUserById(int uid)
         
