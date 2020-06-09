@@ -55,7 +55,21 @@ namespace BizarreBazaar.Controllers
             var rowsAffected = _repository.DeleteProductById(id);
             return Ok($"{rowsAffected} rows affected");
         }
-            
+
+
+        [HttpGet()]
+
+        public IActionResult GetSearchedProducts(string search)
+        {
+            var searchedItem = _repository.GetSearchedProduct(search);
+            if (searchedItem == null)
+            {
+                return NotFound("Sorry but that item doesn't exist.");
+            }
+
+            return Ok(searchedItem);
+        }
+       
 
     }
 }
