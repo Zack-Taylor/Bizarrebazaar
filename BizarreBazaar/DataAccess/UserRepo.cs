@@ -23,7 +23,7 @@ namespace BizarreBazaar.DataAccess
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.Query<User>("select * from [User]");
+                return db.Query<User>("select * from [User] where acctactive = 1");
             }
         }
 
@@ -32,7 +32,7 @@ namespace BizarreBazaar.DataAccess
             var sql = @"select *
                         from [user]
                         where [user].ID = @uid
-                        ";
+                        and acctactive = 1";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -47,7 +47,8 @@ namespace BizarreBazaar.DataAccess
             var sql = @"
                     select *
                     from [user]
-                    where UserName = @userName ";
+                    where UserName = @userName
+                    and acctactive = 1";
 
             using (var db = new SqlConnection(ConnectionString))
             {
