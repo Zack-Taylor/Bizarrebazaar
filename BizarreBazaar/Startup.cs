@@ -30,6 +30,10 @@ namespace BizarreBazaar
             services.AddTransient<UserRepo>();
             services.AddTransient<ProductRepo>();
             services.AddTransient<OrderRepo>();
+            services.AddTransient<LineItemRepo>();
+            services.AddTransient<PaymentRepo>();
+            services.AddTransient<PaymentTypeRepo>();
+            services.AddTransient<ProductTypeRepo>();
             services.AddSingleton<IConfiguration>(Configuration);
         }
 
