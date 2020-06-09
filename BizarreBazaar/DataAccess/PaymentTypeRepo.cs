@@ -25,5 +25,19 @@ namespace BizarreBazaar.DataAccess
                 return db.Query<PaymentType>("select * from PaymentType");
             }
         }
+
+        public PaymentType GetPaymentTypesById(int id)
+        {
+            var sql = @"select * 
+                        from PaymentType
+                        where id = @id
+                        and isactive = 1";
+
+            var parameters = new { Id = id };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.QueryFirstOrDefault<PaymentType>(sql, parameters);
+            }
+        }
     }
 }
