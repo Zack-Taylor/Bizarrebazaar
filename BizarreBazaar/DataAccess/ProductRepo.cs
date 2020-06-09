@@ -74,7 +74,7 @@ namespace BizarreBazaar.DataAccess
             
             var sql = @"
                         select * from Product
-                        where Product.Title like '%' + @search + '%'
+                        where Product.Title like '%' + @search + '%' AND isActive = 1
                     ";
 
             var parameters = new {Search = search};
