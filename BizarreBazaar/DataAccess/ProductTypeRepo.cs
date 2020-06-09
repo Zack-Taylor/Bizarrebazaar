@@ -11,24 +11,14 @@ namespace BizarreBazaar.DataAccess
     public class ProductTypeRepo
     {
         const string ConnectionString = "Server=localhost;Database=BizarreBazaar;Trusted_Connection=True;";
-        public ProductType GetProductByProductType(string category)
+
+        public IEnumerable<ProductType> GetAllProductTypes()
         {
-            var sql = @"select producttype.[name], count(*) as productcount
-                        from product
-                            join producttype on product.producttypeid = producttype.id
-                                group by producttype.[name]
-                                    ";
-
-            var parameters = new
-            {
-                Category = category
-            };
-
             using (var db = new SqlConnection(ConnectionString))
             {
-                var summary = db.QueryFirstOrDefault<ProductType>(sql, parameters);
-                return summary;
+                return db.Query<ProductType>("select * from ProductType");
             }
         }
+        
     }
 }

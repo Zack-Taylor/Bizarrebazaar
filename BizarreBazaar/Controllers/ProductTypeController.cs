@@ -7,15 +7,24 @@ using System.Threading.Tasks;
 
 namespace BizarreBazaar.Controllers
 {
+    [Route("api/producttype")]
+    [ApiController]
     public class ProductTypeController : ControllerBase
     {
+        ProductTypeRepo _repository;
 
-        [HttpGet("{productType}")]
-        public IActionResult GetProductByProductType(string category)
+        public ProductTypeController(ProductTypeRepo repository)
         {
-            var repo = new ProductTypeRepo();
-            var productCategories = repo.GetProductByProductType(category);
-            return Ok(productCategories);
+            _repository = repository;
         }
+
+        [HttpGet]
+        public IActionResult GetAllProductTypes()
+        {
+            var allProductTypes = _repository.GetAllProductTypes();
+
+            return Ok(allProductTypes);
+        }
+
     }
 }
