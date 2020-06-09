@@ -1,5 +1,6 @@
 ﻿using BizarreBazaar.Models;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,7 +11,12 @@ namespace BizarreBazaar.DataAccess
 {
     public class ProductTypeRepo
     {
-        const string ConnectionString = "Server=localhost;Database=BizarreBazaar;Trusted_Connection=True;";
+        string ConnectionString;
+
+        public ProductTypeRepo(IConfiguration config)
+        {
+            ConnectionString = config.GetConnectionString("BizarreBazaar");
+        }
 
         public IEnumerable<ProductType> GetAllProductTypes()
         {
@@ -24,7 +30,8 @@ namespace BizarreBazaar.DataAccess
         {
             var sql = @"select * 
                         from ProductType
-                        where id = @id";
+                        where id = @id
+                        and isactive = 1";
 
             var parameters = new { Id = id };
             using (var db = new SqlConnection(ConnectionString))
