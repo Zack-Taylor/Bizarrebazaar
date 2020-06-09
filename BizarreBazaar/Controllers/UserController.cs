@@ -71,5 +71,18 @@ namespace BizarreBazaar.Controllers
             return Ok(existingUser);
         }
 
+        [HttpPut("deleteAccount/{uid}")]
+        public IActionResult DeleteAccountById(int uid)
+        {
+            var existingUser = _repository.GetUserById(uid);
+            if (existingUser != null)
+            {
+                _repository.DeleteUserAccount(uid);
+                return Ok($"User with the id of {uid} has been successfully deleted.");
+            }
+
+            return NotFound("Sorry, this user does not exist.");
+
+        }
     }
 }
