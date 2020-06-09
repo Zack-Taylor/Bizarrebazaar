@@ -22,7 +22,7 @@ namespace BizarreBazaar.DataAccess
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.Query<PaymentType>("select * from PaymentType");
+                return db.Query<PaymentType>("select * from PaymentType where isActive = 1");
             }
         }
 
@@ -37,6 +37,19 @@ namespace BizarreBazaar.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 return db.QueryFirstOrDefault<PaymentType>(sql, parameters);
+            }
+        }
+
+        public int DeletePaymentTypeById(int id)
+        {
+            var sql = @"update paymenttype
+                        set isActive = 0
+                        where id = @id";
+
+            var parameters = new { Id = id };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Execute(sql, parameters);
             }
         }
     }
