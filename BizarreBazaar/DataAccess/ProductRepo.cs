@@ -48,10 +48,11 @@ namespace BizarreBazaar.DataAccess
                         where userId = @uid
                         and isActive = 1";
 
-            var parameters = new { Uid = uid };
+            var parameters = new {Uid = uid};
             using (var db = new SqlConnection(ConnectionString))
-            {            
+            {
                 return db.Query<Product>(sql, parameters);
+
             }
         }
 
@@ -67,6 +68,23 @@ namespace BizarreBazaar.DataAccess
                 return db.Execute(sql, parameters);
             }
         }
+
+        public IEnumerable<Product> GetSearchedProduct(string search)
+        {
+            
+            var sql = @"
+                        select * from Product
+                        where Product.Title like '%' + @search + '%' AND isActive = 1
+                    ";
+
+            var parameters = new {Search = search};
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Product>(sql, parameters);
+            }
+            
+        }
+
 
     }
 }
