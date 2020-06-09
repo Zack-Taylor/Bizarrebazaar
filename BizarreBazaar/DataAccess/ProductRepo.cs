@@ -26,6 +26,18 @@ namespace BizarreBazaar.DataAccess
                 return db.Query<Product>("select * from Product");
             }
         }
+
+
+        public IEnumerable<Product> GetSearchedProduct()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = @"
+                        select * from Product
+                        where Product.Title like '%Mona%'
+                        ";
+            }
+        }
     }
 }
 
