@@ -19,6 +19,20 @@ namespace BizarreBazaar.DataAccess
                 return db.Query<ProductType>("select * from ProductType");
             }
         }
-        
+
+        public ProductType GetProductTypesById(int id)
+        {
+            var sql = @"select * 
+                        from ProductType
+                        where id = @id";
+
+            var parameters = new { Id = id };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.QueryFirstOrDefault<ProductType>(sql, parameters);
+            }
+        }
+
+
     }
 }

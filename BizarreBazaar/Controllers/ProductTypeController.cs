@@ -26,5 +26,17 @@ namespace BizarreBazaar.Controllers
             return Ok(allProductTypes);
         }
 
+        [HttpGet("productTypeId/{id}")]
+        public IActionResult GetProductTypesById(int id)
+        {
+            var productType = _repository.GetProductTypesById(id);
+            if (productType == null)
+            {
+                return NotFound("That product type does not exist");
+            }
+            return Ok(productType);
+        }
+
+
     }
 }
