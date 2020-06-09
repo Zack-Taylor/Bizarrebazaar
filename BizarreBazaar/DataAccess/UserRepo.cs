@@ -71,5 +71,27 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        public User DeleteUserAccount(int uid)
+        {
+            var sql = @"update [user]
+                        set FirstName = null,
+                        set LastName = null,
+                        set UserName = null,
+                        set Email = null,
+                        set ImageUrl = null,
+                        set [Password] = null,
+                        set AcctActive = 0
+                        where [user].ID = @uid
+                        ";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { Uid = uid };
+                var results = db.QueryFirstOrDefault<User>(sql, uid);
+                return results;
+
+            }
+        }
+
     }
 }
