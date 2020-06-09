@@ -26,6 +26,17 @@ namespace BizarreBazaar.Controllers
             return Ok(allPaymentTypes);
         }
 
+        [HttpGet("paymentTypeId/{id}")]
+        public IActionResult GetPaymentTypesById(int id)
+        {
+            var paymentType = _repository.GetPaymentTypesById(id);
+            if (paymentType == null)
+            {
+                return NotFound("That payment type is not accepted");
+            }
+            return Ok(paymentType);
+        }
+
 
 
     }
