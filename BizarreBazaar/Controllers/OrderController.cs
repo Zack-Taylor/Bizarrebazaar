@@ -30,7 +30,7 @@ namespace BizarreBazaar.Controllers
         }
 
 
-        [HttpGet("order/{uid}")]
+        [HttpGet("userId/{uid}")]
         public IActionResult GetCompletedOrder(int uid)
         {
             var orders = _repository.GetCompletedOrdersByUserId(uid);
