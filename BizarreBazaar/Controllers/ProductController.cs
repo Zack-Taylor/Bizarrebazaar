@@ -28,6 +28,17 @@ namespace BizarreBazaar.Controllers
             return Ok(allProducts);
         }
 
+        [HttpGet("productId/{id}")]
+        public IActionResult GetProductById(int id)
+        {
+            var product = _repository.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound("That product does not exist");
+            }
+            return Ok(product);
+        }
+
         [HttpGet("userId/{uid}")]
         public IActionResult GetProductsByUserId(int uid)
         {
