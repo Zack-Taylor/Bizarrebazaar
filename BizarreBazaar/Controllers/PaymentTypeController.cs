@@ -37,7 +37,12 @@ namespace BizarreBazaar.Controllers
             return Ok(paymentType);
         }
 
-
+        [HttpPut("deleteById/{id}")]
+        public IActionResult DeletePaymentTypeById(int id)
+        {
+            var rowsAffected = _repository.DeletePaymentTypeById(id);
+            return Ok($"{rowsAffected} rows affected");
+        }
 
     }
 }
