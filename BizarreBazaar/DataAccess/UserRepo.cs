@@ -89,7 +89,6 @@ namespace BizarreBazaar.DataAccess
                 var parameters = new { Uid = uid };
                 var results = db.QueryFirstOrDefault<User>(sql, parameters);
                 return results;
-
             }
         }
 
