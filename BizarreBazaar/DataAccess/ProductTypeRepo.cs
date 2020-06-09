@@ -16,7 +16,7 @@ namespace BizarreBazaar.DataAccess
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.Query<ProductType>("select * from ProductType");
+                return db.Query<ProductType>("select * from ProductType where isActive = 1");
             }
         }
 
@@ -30,6 +30,19 @@ namespace BizarreBazaar.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 return db.QueryFirstOrDefault<ProductType>(sql, parameters);
+            }
+        }
+
+        public int DeleteProductTypeById(int id)
+        {
+            var sql = @"update productType
+                        set isActive = 0
+                        where id = @id";
+
+            var parameters = new { Id = id };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Execute(sql, parameters);
             }
         }
 

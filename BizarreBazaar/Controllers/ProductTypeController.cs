@@ -37,6 +37,14 @@ namespace BizarreBazaar.Controllers
             return Ok(productType);
         }
 
+        [HttpPut("deleteById/{id}")]
+        public IActionResult DeleteProductTypeById(int id)
+        {
+            var productTypeRowsAffected = _repository.DeleteProductTypeById(id);
+            return Ok($"{productTypeRowsAffected} product type rows affected");
+        }
+
+
 
     }
 }
