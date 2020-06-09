@@ -19,7 +19,6 @@ namespace BizarreBazaar.Controllers
             _repository = repository;
         }
 
-        //api/product
         [HttpGet]
         public IActionResult GetProducts()
         {
@@ -47,9 +46,16 @@ namespace BizarreBazaar.Controllers
             {
                 return NotFound("No products exist for this seller.");
             }
-
             return Ok(products);
         }
+
+        [HttpPut("deleteById/{id}")]
+        public IActionResult DeleteProductById(int id)
+        {
+            var rowsAffected = _repository.DeleteProductById(id);
+            return Ok($"{rowsAffected} rows affected");
+        }
+            
 
     }
 }

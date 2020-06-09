@@ -53,6 +53,19 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        public int DeleteProductById(int id)
+        {
+            var sql = @"update product
+                        set isActive = 0
+                        where id = @id";
+
+            var parameters = new { Id = id };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Execute(sql, parameters);
+            }
+        }
+
     }
 }
 
