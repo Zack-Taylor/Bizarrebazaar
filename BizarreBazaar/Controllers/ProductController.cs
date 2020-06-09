@@ -28,5 +28,17 @@ namespace BizarreBazaar.Controllers
             return Ok(allProducts);
         }
 
+        [HttpGet("userId/{uid}")]
+        public IActionResult GetProductsByUserId(int uid)
+        {
+            var products = _repository.GetProductsByUserId(uid);
+            if (products.Count() < 1)
+            {
+                return NotFound("No products exist for this seller.");
+            }
+
+            return Ok(products);
+        }
+
     }
 }

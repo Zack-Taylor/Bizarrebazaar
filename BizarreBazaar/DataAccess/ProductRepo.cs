@@ -27,17 +27,20 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
-
-        public IEnumerable<Product> GetSearchedProduct()
+        public IEnumerable<Product> GetProductsByUserId(int uid)
         {
+            var sql = @"select * 
+                        from Product
+                        where userId = @uid";
+
+            var parameters = new {Uid = uid};
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = @"
-                        select * from Product
-                        where Product.Title like '%Mona%'
-                        ";
+                return db.Query<Product>(sql, parameters);
+
             }
         }
+
     }
 }
 
