@@ -13,6 +13,7 @@ namespace BizarreBazaar.DataAccess
     public class OrderRepo
     {
         string ConnectionString;
+
         public OrderRepo(IConfiguration config)
         {
             ConnectionString = config.GetConnectionString("BizarreBazaar");
@@ -22,42 +23,71 @@ namespace BizarreBazaar.DataAccess
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.Query<Order>("select * from [Order]");
+                return db.Query<Order>("select * from [order]");
             }
         }
 
-        public IEnumerable<Order> GetCompletedOrdersByUserId(int uid)
+        public IEnumerable<Order> GetAllOrdersByUserId(int UserId)
         {
-            var sql = @"
-                select 
-                [user].ID,
-                [order].id as orderId, 
-                [user].username as Seller, 
-                [order].userId, 
-                product.title, 
-                product.imageurl, 
-                [order].invoicedate as dateordered, 
-                product.price, 
-                lineitem.quantity, 
-                paymenttype.[name] as paymenttype, 
-                product.price * lineitem.quantity as producttotal
-                from lineitem
-                join product on product.id = productId
-                join [user] on [user].id = product.userId
-                join [order] on [order].id = orderId
-                join payment on payment.id = [order].paymentid
-                join paymenttype on paymenttype.id = payment.paymenttypeId
-                where iscomplete = 1 and [order].userId = @uid
-                order by [order].id
-                ";
+            var sql = @" select * 
+                        from [order]
+                        where UserId = @UserId 
+                        ";
 
+            var parameters = new { UserId };
             using (var db = new SqlConnection(ConnectionString))
             {
-                var parameters = new { Uid = uid };
-                var result = db.Query<Order>(sql, parameters);
-                return result;
+                return db.Query<Order>(sql, parameters);
             }
         }
 
+        public IEnumerable<Order> GetSingleOrder(int id)
+        {
+            var sql = @"select *
+                        from[order]
+                        where id = @id";
+
+            var parameters = new { id };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Order>(sql, parameters);
+            }
+        }
+
+        public IEnumerable<Order> GetCompleteOrdersByUserId(int UserId)
+        {
+            var sql = @" select * 
+                        from [order]
+                        where UserId = @UserId
+                        and IsComplete = 1
+                        ";
+
+            var parameters = new { UserId };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Order>(sql, parameters);
+            }
+        }
+
+        public Order CreateNewShoppingCart(int userId, int paymentTypeId)
+        {
+            throw new NotImplementedException();
+            //insert statement via sql
+        }
+
+        public Order GetShoppingCartByUserId(int UserId)
+        {
+            var sql = @" select * 
+                        from [order]
+                        where UserId = @UserId
+                        and IsComplete = 0
+                        ";
+
+            var parameters = new { UserId };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.QueryFirstOrDefault<Order>(sql, parameters);
+            }
+        }
     }
 }
