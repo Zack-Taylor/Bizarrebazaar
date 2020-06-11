@@ -19,27 +19,50 @@ namespace BizarreBazaar.Controllers
             _repository = repository;
         }
 
-
         //api/order
         [HttpGet]
         public IActionResult GetAllOrders()
         {
             var allOrders = _repository.GetAllOrders();
-
             return Ok(allOrders);
         }
 
-
-        [HttpGet("userId/{uid}")]
-        public IActionResult GetCompletedOrder(int uid)
+        //api/order/user/userid
+        [HttpGet("user/{userid}")]
+        public IActionResult GetOrdersByUserId(int UserId)
         {
-            var orders = _repository.GetCompletedOrdersByUserId(uid);
-            if (orders.Count() < 1)
-            {
-                return NotFound("Sorry, but you don't have any completed orders.");
-            }
+            var allUserOrders = _repository.GetAllOrdersByUserId(UserId);
+            return Ok(allUserOrders);
+        }
 
-            return Ok(orders);
+        //api/order/orderid/8
+        [HttpGet("orderid/{id}")]
+        public IActionResult GetSingleOrder(int Id)
+        {
+            var singleOrder = _repository.GetSingleOrder(Id);
+            return Ok(singleOrder);
+        }
+
+        //api/order/complete/1
+        [HttpGet("complete/{id}")]
+        public IActionResult GetCompleteOrdersByUserId(int UserId)
+        {
+            var CompletedOrders = _repository.GetCompleteOrdersByUserId(UserId);
+            return Ok(CompletedOrders);
+        }
+
+        //api/order/shoppingcart/12
+        [HttpGet("shoppingcart/{userid}/{paymenttypeid}")]
+        public IActionResult GetShoppingCartByUserId(int UserId, int PaymentTypeId)
+        {
+            var ShoppingCart = _repository.GetShoppingCartByUserId(UserId);
+            if (ShoppingCart == null)
+            {
+                //Create a new shopping cart
+                var NewShoppingCart = _repository.CreateNewShoppingCart(UserId, PaymentTypeId);
+
+            }
+            return Ok(ShoppingCart);
         }
     }
 }

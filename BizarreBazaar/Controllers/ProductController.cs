@@ -69,7 +69,5 @@ namespace BizarreBazaar.Controllers
 
             return Ok(searchedItem);
         }
-       
-
     }
 }
