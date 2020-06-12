@@ -21,7 +21,7 @@ namespace BizarreBazaar.Controllers
             _lineitemrepository = lineitemrepository;
         }
 
-        //api/order/addtocart/2
+        //api/lineitem/addtocart/2
         [HttpGet("addtocart/{userid}/{paymenttypeid}/{productid}")]
         public IActionResult AddToShoppingCart(int UserId, int PaymentTypeId, int ProductId)
         {
@@ -34,6 +34,19 @@ namespace BizarreBazaar.Controllers
             } else
             _lineitemrepository.AddToCart(UserId, ProductId, ShoppingCart.ID);
             return Ok();
+        }
+
+        //api/lineitem/orderid/2
+        [HttpGet("orderid/{orderid}")]
+        public IActionResult GetLineItemsByOrderId(int orderId) 
+        {
+            var order = _orderrepository.GetOrderByOrderId(orderId);
+            if (order == null)
+            {
+                return NotFound("Didn't find that order.");
+            }
+            var detailedLineItems = _lineitemrepository.GetLineItemDetailsByOrderId(orderId);
+            return Ok(detailedLineItems);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using BizarreBazaar.Models;
+using BizarreBazaar.Models.ViewModels;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,7 +12,12 @@ namespace BizarreBazaar.DataAccess
 {
     public class LineItemRepo
     {
-        private string ConnectionString;
+        string ConnectionString;
+
+        public LineItemRepo(IConfiguration config)
+        {
+            ConnectionString = config.GetConnectionString("BizarreBazaar");
+        }
 
         internal void AddToCart(int userId, int productId, int orderid)
         {
@@ -51,5 +58,23 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        public IEnumerable<LineItemDetail> GetLineItemDetailsByOrderId(int orderId) 
+        {
+
+            var sql = @"select 
+                            product.title, product.price, product.userId as SellerId, product.imageUrl, lineitem.quantity as quantityPurchased
+                        from lineitem
+                            join product on product.id = lineitem.productId
+                            join [order] on [Order].id = lineitem.orderId
+                            where orderId = @orderId and [order].iscomplete = 1
+                        ";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { OrderId = orderId };
+                var results = db.Query<LineItemDetail>(sql, parameters);
+                return results;
+            }
+        }
     }
 }
