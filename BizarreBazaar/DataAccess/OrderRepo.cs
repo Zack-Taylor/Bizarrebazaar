@@ -41,16 +41,16 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
-        public IEnumerable<Order> GetSingleOrder(int id)
+        public Order GetOrderByOrderId(int id)
         {
             var sql = @"select *
-                        from[order]
+                        from [order]
                         where id = @id";
 
             var parameters = new { id };
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.Query<Order>(sql, parameters);
+                return db.QueryFirstOrDefault<Order>(sql, parameters);
             }
         }
 
@@ -73,6 +73,7 @@ namespace BizarreBazaar.DataAccess
         {
             throw new NotImplementedException();
             //insert statement via sql
+            //needs to check if there is an order for userid that is incomplete
         }
 
         public Order GetShoppingCartByUserId(int UserId)

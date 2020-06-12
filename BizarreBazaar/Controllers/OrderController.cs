@@ -39,11 +39,11 @@ namespace BizarreBazaar.Controllers
         [HttpGet("orderid/{id}")]
         public IActionResult GetSingleOrder(int Id)
         {
-            var singleOrder = _repository.GetSingleOrder(Id);
+            var singleOrder = _repository.GetOrderByOrderId(Id);
             return Ok(singleOrder);
         }
 
-        //api/order/complete/1
+        //api/order/complete/1 -->order is already complete
         [HttpGet("complete/{id}")]
         public IActionResult GetCompleteOrdersByUserId(int UserId)
         {
@@ -51,7 +51,7 @@ namespace BizarreBazaar.Controllers
             return Ok(CompletedOrders);
         }
 
-        //api/order/shoppingcart/12
+        //api/order/shoppingcart/12 --->only ever one incomplete order
         [HttpGet("shoppingcart/{userid}/{paymenttypeid}")]
         public IActionResult GetShoppingCartByUserId(int UserId, int PaymentTypeId)
         {
