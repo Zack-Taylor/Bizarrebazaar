@@ -26,7 +26,11 @@ namespace BizarreBazaar
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddCors(options =>
+                options.AddPolicy("ItsAllGood",
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+
+           services.AddControllers();
             services.AddTransient<UserRepo>();
             services.AddTransient<ProductRepo>();
             services.AddTransient<OrderRepo>();
@@ -48,6 +52,8 @@ namespace BizarreBazaar
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ItsAllGood");
 
             app.UseAuthorization();
 
