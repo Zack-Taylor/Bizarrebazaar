@@ -37,6 +37,14 @@ namespace BizarreBazaar.Controllers
             return Ok(productType);
         }
 
+        [HttpGet("producttypenumbers")]
+        public IActionResult GetProductCategoriesAndNumbers()
+        {
+            var allProductTypesAndNumbers = _repository.GetProductCategoriesAndNumbers();
+
+            return Ok(allProductTypesAndNumbers);
+        }
+
         [HttpPut("deleteById/{id}")]
         public IActionResult DeleteProductTypeById(int id)
         {
