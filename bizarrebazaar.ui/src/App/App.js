@@ -9,8 +9,10 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import fbConnection from '../helpers/data/connection';
 import Auth from '../components/pages/Auth/Auth';
+
 import Home from '../components/pages/Home/Home';
 import Nav from '../components/shared/Navbar/Navbar';
+import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 import './App.scss';
 
 fbConnection();
@@ -62,6 +64,8 @@ class App extends React.Component {
             />
           </Switch>
         </Router>
+      <ProductDetail/>
+
       </div>
     );
   }

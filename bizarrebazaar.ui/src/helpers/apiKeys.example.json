@@ -1,5 +1,6 @@
 {
     "firebaseKeys": {
+<<<<<<< HEAD
       "apiKey": "",
       "authDomain": "",
       "databaseURL": "",
@@ -7,5 +8,14 @@
       "storageBucket": "",
       "messagingSenderId": "",
       "appId": ""
+=======
+        "apiKey": "",
+        "authDomain": "",
+        "databaseURL": "",
+        "projectId": "",
+        "storageBucket": "",
+        "messagingSenderId": "",
+        "appId": ""
+>>>>>>> master
     }
 }
