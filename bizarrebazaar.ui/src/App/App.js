@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -7,6 +8,12 @@ import {
 } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+=======
+/* eslint-disable no-shadow */
+import React, { Component } from 'react';
+import Auth from '../components/pages/Auth/Auth';
+import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
+>>>>>>> master
 import './App.scss';
 import Auth from '../components/pages/Auth/Auth';
 import Art from '../components/pages/ArtProducts/ArtProducts';
@@ -48,6 +55,7 @@ class App extends React.Component {
   render() {
     const { authed } = this.state;
     return (
+<<<<<<< HEAD
       <div className="App">
         <Router>
           <MyNavbar authed={authed}/>
@@ -63,6 +71,10 @@ class App extends React.Component {
             <PrivateRoute path="/MiscProducts" exact component={Misc} authed={authed}/>
           </Switch>
         </Router>
+=======
+      <div>
+      <ProductDetail/>
+>>>>>>> master
       </div>
     );
   }
