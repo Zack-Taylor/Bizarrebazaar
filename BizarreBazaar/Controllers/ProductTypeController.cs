@@ -37,6 +37,14 @@ namespace BizarreBazaar.Controllers
             return Ok(productType);
         }
 
+        [HttpGet("producttypenumbers")]
+        public IActionResult GetProductCategoriesAndNumbers()
+        {
+            var allProductTypesAndNumbers = _repository.GetProductCategoriesAndNumbers();
+
+            return Ok(allProductTypesAndNumbers);
+        }
+
         [HttpPut("deleteById/{id}")]
         public IActionResult DeleteProductTypeById(int id)
         {
@@ -44,7 +52,11 @@ namespace BizarreBazaar.Controllers
             return Ok($"{productTypeRowsAffected} product type rows affected");
         }
 
-
-
+        [HttpGet("topthreebytypename/{producttype}")]
+        public IActionResult GetTopThreeProductsByType(string producttype)
+        {
+            var topthree = _repository.GetTopThreeProductsByType(producttype);
+            return Ok(topthree);
+        }
     }
 }
