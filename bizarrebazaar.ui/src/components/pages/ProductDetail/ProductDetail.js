@@ -1,27 +1,22 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
+import productData from '../../../helpers/data/productData';
 import './ProductDetail.scss';
 
 class ProductDetail extends React.Component {
-    state = {
-      product: {
-        id: 34,
-        productTypeId: 1,
-        price: 153,
-        title: 'Ice Key',
-        // eslint-disable-next-line max-len
-        description: 'This mysterious key made entirely of ice originally had nothing to unlock, but in a land separated by space and time it is said to have opened a secret chest with a powerful magic creature inside.',
-        quantity: 1,
-        userId: 12,
-        dateAdded: '2020-06-08T19:25:37.207',
-        imageUrl: 'https://raw.githubusercontent.com/Zack-Taylor/Bizarrebazaar/master/bizarrebazaar.ui/src/assets/productImages/ice_key.png',
-        isActive: true,
-      },
-    }
+  state = {
+    product: {},
+  }
 
-    componentDidMount() {
+  componentDidMount() {
+    this.setProductToState(26);
+  }
 
+    setProductToState = (productId) => {
+      productData.getProductById(productId)
+        .then((result) => this.setState({ product: result.data }))
+        .catch((error) => console.error('error getting that product', error));
     }
 
     render() {
