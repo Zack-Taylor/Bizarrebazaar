@@ -52,7 +52,11 @@ namespace BizarreBazaar.Controllers
             return Ok($"{productTypeRowsAffected} product type rows affected");
         }
 
-
-
+        [HttpGet("topthreebytypename/{producttype}")]
+        public IActionResult GetTopThreeProductsByType(string producttype)
+        {
+            var topthree = _repository.GetTopThreeProductsByType(producttype);
+            return Ok(topthree);
+        }
     }
 }
