@@ -1,4 +1,5 @@
 ﻿using BizarreBazaar.Models;
+using BizarreBazaar.Models.ViewModels;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -50,6 +51,39 @@ namespace BizarreBazaar.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 return db.Execute(sql, parameters);
+            }
+        }
+
+        public IEnumerable<ProductTypeSummary> GetProductCategoriesAndNumbers()
+        {
+            var sql = @"select producttype.[name] as producttypename, count(*) as producttypecount
+                      from product
+                      join producttype on product.producttypeid = producttype.id
+                      group by producttype.[name]";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var results = db.Query<ProductTypeSummary>(sql);
+                return results;
+            }
+        }
+
+        public List<TopThreeProductInProductType> GetTopThreeProductsByType(string producttype)
+        {
+            var sql = @"select top(3) product.[title] as ProductTitle, producttype.[name] as ProductTypeName
+                        from product
+                        join producttype on producttype.id = product.producttypeid
+                        where producttype.[name] = @producttype";
+
+            var parameters = new
+            {
+                Producttype = producttype
+            };
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var topthree = db.Query<TopThreeProductInProductType>(sql, parameters).ToList();
+                return topthree;
             }
         }
 
