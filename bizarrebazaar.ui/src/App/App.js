@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Auth from '../components/pages/Auth/Auth';
 import UserProfile from '../components/shared/UserProfile/UserProfile';
+import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 import './App.scss';
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
       <div>
       <Auth/>
       <UserProfile/>
+      <ProductDetail/>
       </div>
     );
   }
