@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class SignUpForm extends Component {
-  constructor() {
-    super();
 
-    this.state = {
+    state = {
       email: '',
       password: '',
       firstname: '',
@@ -13,27 +11,7 @@ class SignUpForm extends Component {
       username: '',
       hasAgreed: false,
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    const { target } = e;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-
-    console.log('The form was submitted with the following data:');
-    console.log(this.state);
-  }
+  
 
   render() {
     return (
@@ -41,27 +19,27 @@ class SignUpForm extends Component {
       < form className="FormFields" onSubmit={this.handleSubmit}>
         <div className="FormField">
           <label className="FormField__Label" htmlFor="firstName">FirstName</label>
-          <input type="text" id="firstname" className="FormField__Input" placeholder="Enter your first name" name="firstname" value={this.state.firstname} onChange={this.handleChange}/>
+          <input type="text" id="firstname" className="FormField__Input" placeholder="Enter your first name" name="firstname"  />
         </div>
 
         <div className="FormField">
           <label className="FormField__Label" htmlFor="firstName">LastName</label>
-          <input type="text" id="lastname" className="FormField__Input" placeholder="Enter your last name" name="lastname" value={this.state.lastname} onChange={this.handleChange}/>
+          <input type="text" id="lastname" className="FormField__Input" placeholder="Enter your last name" name="lastname" />
         </div>
 
         <div className="FormField">
           <label className="FormField__Label" htmlFor="firstName">UserName</label>
-          <input type="text" id="username" className="FormField__Input" placeholder="Enter a username" name="username" value={this.state.username} onChange={this.handleChange}/>
+          <input type="text" id="username" className="FormField__Input" placeholder="Enter a username" name="username" />
         </div>
 
         <div className="FormField">
           <label className="FormField__Label" htmlFor="firstName">Email</label>
-          <input type="email" id="email" className="FormField__Input" placeholder="Enter your email address" name="email" value={this.state.email} onChange={this.handleChange}/>
+          <input type="email" id="email" className="FormField__Input" placeholder="Enter your email address" name="email"/>
         </div>
 
         <div className="FormField">
           <label className="FormField__Label" htmlFor="password">Password</label>
-          <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" value={this.state.password} onChange={this.handleChange}/>
+          <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" />
         </div>
       </form>
 
@@ -76,7 +54,9 @@ class SignUpForm extends Component {
    </div>
    </div>
     );
-  }
+  };
 }
 
+
 export default SignUpForm;
+

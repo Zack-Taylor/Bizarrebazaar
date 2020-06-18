@@ -15,7 +15,7 @@ class Auth extends Component {
   render() {
     return (
         <div>
-        <Router basename="/auth/sign-in">
+      
           <div className="App">
             <div className="App__Aside text-center">
                 <img className="logo" src={owl} alt="logo" />
@@ -38,7 +38,7 @@ class Auth extends Component {
             </div>
 
           </div>
-        </Router>
+    
         </div>
 
     );

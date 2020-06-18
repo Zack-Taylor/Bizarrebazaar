@@ -13,24 +13,13 @@ axios.interceptors.request.use((request) => {
 }, (err) => Promise.reject(err));
 
 const loginUser = (user) => firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-  .then((cred) => {
+  .then((cred) => { 
     cred.user.getIdToken()
-      .then((token) => sessionStorage.setItem('token', token));
-  });
+      .then((token) => {
+        sessionStorage.setItem('token', token)
+      });
+  })
+  .catch(console.error);
 
-const signInUser = (firebaseInfo) => new Promise((resolve, reject) => {
-  firebase.auth().signInWithEmailAndPassword(firebaseInfo.email, firebaseInfo.password)
-    .then((cred) => cred.user.getIdToken())
-    .then((token) => sessionStorage.setItem('token', token))
-    .catch((err) => reject(err));
-});
 
-const addUser = (newUserObj, firebaseInfo) => new Promise((resolve, reject) => {
-  firebase.auth().createUserWithEmailAndPassword(firebaseInfo.email, firebaseInfo.password)
-    .then((cred) => cred.user.getIdToken())
-    .then((token) => sessionStorage.setItem('token', token))
-    .then(() => resolve(axios.post(`${baseUrl}`, newUserObj)))
-    .catch((err) => reject(err));
-});
-
-export default { loginUser, addUser, signInUser };
+export default { loginUser };

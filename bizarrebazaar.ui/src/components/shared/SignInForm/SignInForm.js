@@ -13,12 +13,10 @@ class SignInForm extends React.Component {
 
   loginEvent = (e) => {
     e.preventDefault();
-    const { user } = this.state;
-    console.error(user.email);
+    const {user} = this.state;
     userData.loginUser(user)
       .then(() => {
         console.error('user login');
-        this.props.history.push('/');
       })
       .catch((error) => {
         console.error('there was an error when logging in');
@@ -27,19 +25,16 @@ class SignInForm extends React.Component {
 
   emailChange = (e) => {
     e.preventDefault();
-    const defaultUser = { ...this.state.user };
-    defaultUser.email = e.target.value;
-    this.setState({ user: defaultUser });
-    // console.error('email works');
+    const tempUser = { ...this.state.user };
+    tempUser.email = e.target.value;
+    this.setState({ user: tempUser });
   }
 
   passwordChange = (e) => {
     e.preventDefault();
-    // const defaultUser = { ...this.state.user };
-    // defaultUser.password = e.target.value;
-    // this.setState({ user: defaultUser });
-    // console.error('password works');
-    this.setState.user({ password: e.target.value });
+    const tempUser = { ...this.state.user };
+    tempUser.password = e.target.value;
+    this.setState({ user: tempUser });
   }
 
   render() {
@@ -49,7 +44,7 @@ class SignInForm extends React.Component {
       <div className="FormCenter">
         <form className="FormFields">
           <div className="FormField form-group">
-            <label className="FormField__Label" htmlFor="firstName">Email</label>
+            <label className="FormField__Label" htmlFor="email">Email</label>
             <input
             type="email"
             id="email"
@@ -66,12 +61,12 @@ class SignInForm extends React.Component {
             id="password"
             className="FormField__Input form-control"
             placeholder="Enter your password"
-            value={user.email}
+            value={user.password}
             onChange={this.passwordChange}/>
           </div>
 
           <div className="FormField">
-          <button className="FormField__Button mr-20" onClick={this.loginClickEvent}>Sign In</button> <Link to="/sign-in" className="FormField__Link">Create an account</Link>
+          <button className="FormField__Button mr-20" onClick={this.loginEvent}>Sign In</button> <Link to="/sign-in" className="FormField__Link">Create an account</Link>
         </div>
         </form>
       </div>
