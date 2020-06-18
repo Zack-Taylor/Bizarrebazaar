@@ -36,8 +36,7 @@ namespace BizarreBazaar.Controllers
         
         {
             var user = _repository.GetUserById(uid);
-            var isEmpty = !user.Any();
-            if (isEmpty)
+            if (user == null)
             {
                 return NotFound("Sorry, this user does not exist.");
             }
