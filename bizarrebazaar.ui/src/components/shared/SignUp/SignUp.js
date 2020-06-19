@@ -27,10 +27,6 @@ class SignUp extends React.Component {
           email, password, firstname, lastname, username, confirmPassword,
         } = this.state;
         const userObj = { ...this.state };
-        if (password !== confirmPassword) {
-          // eslint-disable-next-line no-alert
-          alert("Sorry, passwords don't match");
-        }
         userData.registerUser(email, password, firstname, lastname, username, confirmPassword)
           .then(() => {
             userData.addUserToDatabase(userObj);
