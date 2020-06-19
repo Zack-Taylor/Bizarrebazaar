@@ -20,15 +20,22 @@ class UserProfile extends React.Component {
   render() {
     const { user } = this.state;
     return (
-      <div>
-        <ul>
-          <li>Avatar: <img src={user.imageUrl} alt="frodo's avatar pic"></img></li>
-          <li>Name: {user.firstName} {user.LastName}</li>
-          <li>Username: {user.userName}</li>
-          <li>Email: {user.email}</li>
-          <li>Password: {user.password}</li>
-        </ul>
-      </div>
+      `<div class="row">
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src=${user.imageUrl} alt="frodo's avatar pic">
+              <span class="card-title">${user.firstName} ${user.LastName}</span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content">
+            <p><li>Username: ${user.userName}</li>
+                <li>Email: ${user.email}</li>
+                <li>Password: ${user.password}</li></p>
+            </div>
+          </div>
+        </div>
+      </div>`
     );
   }
 }
