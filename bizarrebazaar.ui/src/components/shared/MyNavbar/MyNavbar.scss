@@ -1,0 +1,44 @@
+.logo-nav {
+    width: 60px;
+    bottom: 100px;
+}
+
+#cart-icon {
+width: 2px;
+height: 2px;
+}
+
+.user-icon {
+    color: #000;
+}
+
+.navbar {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    //border-bottom: 2px solid #000;
+   
+  
+    .logo-container {
+      height: 75%;
+      width: 70px;
+      padding: 25px;
+    }
+  
+    .options {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  
+      .option {
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #000;
+        cursor:pointer;
+      }
+    }
+  }
