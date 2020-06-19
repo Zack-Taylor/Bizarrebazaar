@@ -54,7 +54,6 @@ class App extends React.Component {
           <MyNavbar authed={authed} userObj={userObj}/>
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
-            {/* <Route path="/auth" exact component={Auth} authed={authed}/> */}
             <Route
             path='/auth'
             render={() => (authed ? (

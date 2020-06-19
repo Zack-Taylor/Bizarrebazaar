@@ -1,4 +1,7 @@
 import React from 'react';
+import moment from 'moment';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import userData from '../../../helpers/data/userData';
 import FormInput from '../FormInput/FormInput';
 import CustomBtn from '../CustomBtn/CustomBtn';
@@ -23,12 +26,14 @@ class SignUp extends React.Component {
         const {
           email, password, firstname, lastname, username, confirmPassword,
         } = this.state;
+        const userObj = { ...this.state };
         if (password !== confirmPassword) {
+          // eslint-disable-next-line no-alert
           alert("Sorry, passwords don't match");
         }
         userData.registerUser(email, password, firstname, lastname, username, confirmPassword)
           .then(() => {
-            // this.props.history.push('/home');
+            userData.addUserToDatabase(userObj);
             console.error('this works');
           })
           .catch((error) => {
