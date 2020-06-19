@@ -12,14 +12,27 @@ axios.interceptors.request.use((request) => {
   return request;
 }, (err) => Promise.reject(err));
 
-const loginUser = (user) => firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-  .then((cred) => { 
+const loginUser = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((cred) => {
+    cred.user.getIdToken()
+      .then((token) => sessionStorage.setItem('token', token));
+  })
+  .catch((err) => console.error(err));
+
+const loginWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).then((cred) => {
+    cred.user.getIdToken()
+      .then((token) => sessionStorage.setItem('token', token));
+  });
+};
+
+const registerUser = (email, password) => firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then((cred) => {
     cred.user.getIdToken()
       .then((token) => {
-        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('token', token);
       });
-  })
-  .catch(console.error);
+  });
 
-
-export default { loginUser };
+export default { loginUser, registerUser, loginWithGoogle };
