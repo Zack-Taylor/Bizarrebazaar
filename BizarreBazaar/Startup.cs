@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using BizarreBazaar.DataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BizarreBazaar
 {
@@ -30,7 +32,26 @@ namespace BizarreBazaar
                 options.AddPolicy("ItsAllGood",
                     builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
-           services.AddControllers();
+            var authSettings = Configuration.GetSection("AuthenticationSettings");
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                    {
+                        options.IncludeErrorDetails = true;
+                        options.Authority = authSettings["Authority"];
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidIssuer = authSettings["Issuer"],
+                            ValidateAudience = true,
+                            ValidAudience = authSettings["Audience"],
+                            ValidateLifetime = true
+                        };
+                    }
+                );
+
+
+            services.AddControllers();
             services.AddTransient<UserRepo>();
             services.AddTransient<ProductRepo>();
             services.AddTransient<OrderRepo>();
@@ -48,6 +69,8 @@ namespace BizarreBazaar
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
 

@@ -63,7 +63,7 @@ namespace BizarreBazaar.DataAccess
             var sql = $@"
             insert into [user](FirstName, LastName, AcctCreated, AcctActive, isSeller, UserName, Email, [Password])
             output inserted. *
-            Values(@FirstName, @LastName, GETDATE(), @AcctActive, @isSeller, @UserName, @Email, @Password )";
+            Values(@FirstName, @LastName, GETDATE(), 1, 1, @UserName, @Email, @Password )";
 
             using (var db = new SqlConnection(ConnectionString))
             {
