@@ -1,5 +1,5 @@
 import React from 'react';
-
+import M from 'materialize-css/dist/css/materialize.min.css';
 import userData from '../../../helpers/data/userData';
 
 class UserProfile extends React.Component {
@@ -9,6 +9,7 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     this.setUserToState(3);
+    // M.Collapsible.init(this.Collapsible);
   }
 
   setUserToState = (uid) => {
@@ -17,25 +18,37 @@ class UserProfile extends React.Component {
       .catch((error) => console.error('error getting that user', error));
   }
 
+  clickEvent = (e) => {
+    e.preventDefault();
+    M.Collapsible.onclick();
+  }
+
   render() {
     const { user } = this.state;
+
     return (
-      `<div class="row">
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src=${user.imageUrl} alt="frodo's avatar pic">
-              <span class="card-title">${user.firstName} ${user.LastName}</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-            <p><li>Username: ${user.userName}</li>
-                <li>Email: ${user.email}</li>
-                <li>Password: ${user.password}</li></p>
-            </div>
-          </div>
-        </div>
-      </div>`
+    <div>
+      <div>
+        <img src= {user.imageUrl} alt="avatar pic" class= "circle responsive-img" />
+      </div>
+
+      <div class="document" >
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header"><i class="fa fa-user-circle" aria-hidden="true"></i>UserName</div>
+            <div class="collapsible-body"><span>{user.userName}</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="fa fa-at" aria-hidden="true"></i>Email</div>
+            <div class="collapsible-body"><span>{user.email}</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="fa fa-asterisk" aria-hidden="true"></i>Password</div>
+            <div class="collapsible-body"><span>{user.password}</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
     );
   }
 }
