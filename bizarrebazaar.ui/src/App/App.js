@@ -16,6 +16,7 @@ import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 import ProductTypes from '../components/pages/ProductTypes/ProductTypes';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
+import userData from '../helpers/data/userData';
 import './App.scss';
 
 firebaseConnection();
@@ -31,13 +32,20 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 
 class App extends React.Component {
   state = {
+    userObj: email,
     authed: false,
+    currentUser: email,
   }
 
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged((userObj) => {
+      // fetch call
+      userData.GetUserByEmail(email);
+      const { currentUserObj } = this.state;
       if (userObj) {
-        this.setState({ authed: true, userObj });
+        // call out to api/user by firebase email, ? internalUserId: currentUserObj.id
+        // pass this into the id space on my link
+        this.setState({ authed: true, userObj, currentUserObj });
       } else {
         this.setState({ authed: false });
       }
@@ -50,6 +58,7 @@ class App extends React.Component {
 
   render() {
     const { authed, userObj } = this.state;
+    console.log(userObj);
     return (
       <div>
         <Router>
@@ -69,10 +78,9 @@ class App extends React.Component {
             <Route path="/productTypes/:productTypeId" exact component={ProductsByCategory} authed={authed}/>
             <Route path="/productTypes/:productTypeId/productDetail/:productId" exact component={ProductDetail} authed={authed}/>
             <Route path="/product" exact component={ProductDetail} authed={authed}/>
-            {/* <Route path="/userProfile/:userId" exact component={UserProfile} authed={authed}/> */}
+            <PrivateRoute path="/userProfile:id" exact component={UserProfile} authed={authed}/>
           </Switch>
         </Router>
-        <UserProfile />
       </div>
     );
   }

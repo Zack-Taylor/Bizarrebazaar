@@ -1,67 +1,65 @@
 import React from 'react';
-import '@fortawesome/react-fontawesome';
-import M from 'materialize-css/dist/css/materialize.min.css';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import {
+  Collapse,
+  Button,
+  CardBody,
+  Card,
+} from 'reactstrap';
 import './UserProfile.scss';
 
 import userData from '../../../helpers/data/userData';
-// import { AutoInit } from 'materialize-css';
 
 class UserProfile extends React.Component {
   state = {
-    user: {},
+    isOpen: false,
+    setIsOpen: false,
   }
+  // const [isOpen, setIsOpen] = useState(false);
 
-  componentDidMount() {
-    this.setUserToState(3);
+  clickEvent = (props) => {
+    const toggle = () => this.setState({ setIsOpen: true });
   }
-
-  setUserToState = (uid) => {
-    userData.getUserByUid(uid)
-      .then((result) => this.setState({ user: result.data }))
-      .catch((error) => console.error('error getting that user', error));
-  }
-
-  clickEvent = (e) => {
-    const elem = document.querySelector('.collapsible.expandable');
-    const instance = M.Collapsible.init(elem, {
-      accordion: false,
-    });
-    instance.onclick(e);
-  }
-
-  // clickEvent = (e) => {
-  //   e.preventDefault();
-  //   const { instance } = this.props;
-  // }
 
   render() {
-    const { user } = this.state;
-
+    const { toggle, isOpen } = this.state;
+    const { userObj } = this.props;
     return (
     <div>
-      <div>
-        <img src= {user.imageUrl} alt="avatar pic" className= "circle avatar" />
-      </div>
-
-      <div className="userInfo" >
-        <ul className="collapsible expandable">
-          <li>
-            <div className="collapsible-header"><i className="fa fa-user-circle fa-3x" aria-hidden="true"></i>UserName</div>
-            <div className="collapsible-body"><span>{user.userName}</span></div>
-          </li>
-          <li>
-            <div className="collapsible-header"><i className="fa fa-at fa-3x" aria-hidden="true"></i>Email</div>
-            <div className="collapsible-body"><span>{user.email}</span></div>
-          </li>
-          <li>
-            <div className="collapsible-header"><i className="fa fa-asterisk fa-3x" aria-hidden="true"></i>Password</div>
-            <div className="collapsible-body"><span>{user.password}</span></div>
-          </li>
-        </ul>
+        <div>
+          <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Username</Button>
+          <Collapse isOpen={isOpen}>
+            <Card>
+              <CardBody>
+                {userObj.UserName}
+              </CardBody>
+            </Card>
+          </Collapse>
+        </div>
+          <div>
+          <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Email</Button>
+          <Collapse isOpen={isOpen}>
+            <Card>
+              <CardBody>
+                {userObj.email}
+              </CardBody>
+            </Card>
+          </Collapse>
+        </div>
+        <div>
+        <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Password</Button>
+        <Collapse isOpen={isOpen}>
+          <Card>
+            <CardBody>
+              {userObj.password}
+            </CardBody>
+          </Card>
+        </Collapse>
       </div>
     </div>
     );
   }
 }
 
-export default UserProfile;
+export default { UserProfile };
