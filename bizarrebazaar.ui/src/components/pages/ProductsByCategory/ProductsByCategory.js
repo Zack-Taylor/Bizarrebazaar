@@ -7,7 +7,7 @@ import Product from '../../shared/Product/Product';
 class ProductsByCategory extends React.Component {
   state = {
     productType: {},
-    product: [],
+    products: [],
   }
 
   getProductData = (ProductTypeId) => {
@@ -36,7 +36,7 @@ class ProductsByCategory extends React.Component {
       <div className="ProductsByCategory">
         <h1 className="productTypeName">{productType.name}</h1>
         <div className="productCardSection">
-          {products == null ? [] : products.map((product) => <Product key={product.productId} product={product} />) };
+          {products == null ? [] : products.map((product) => <Product key={product.id} product={product} />) }
         </div>
       </div>
     );
