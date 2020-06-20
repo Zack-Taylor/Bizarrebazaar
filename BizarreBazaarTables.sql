@@ -55,3 +55,5 @@ OrderId int foreign key references [Order](ID) not null,
 ProductId int foreign key references Product(ID) not null,
 Quantity int not null,
 )
+
+alter table product alter COLUMN Price decimal (18,2) not null
