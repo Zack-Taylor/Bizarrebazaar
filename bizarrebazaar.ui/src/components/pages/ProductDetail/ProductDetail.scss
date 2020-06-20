@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
+
+.image-and-details-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 5%;
+}
+
+.product-image-div {
+    width: 45%;
+    min-width: 340px;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.product-details-div {
+    display: flex;
+    width: 45%;
+    padding: 2em;
+    flex-direction: column;
+    border: 4px double #000000;
+    min-width: 340px;
+}
+
+.product-title {
+    font-family: 'Cinzel', serif;
+}
+
+.filed-under {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: medium;
+    margin-bottom: 3em;
+}
+
+.description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+}
+
+.price-and-button {
+    display: block;
+    align-self: flex-end;
+    margin-top: auto;
+    width: 100%;  
+}
+
+.price {
+    float: left;
+    font-family: 'Cinzel', serif;
+    color: #365c83;
+}
+
+.add-to-cart-button {
+    float: right;
+}
