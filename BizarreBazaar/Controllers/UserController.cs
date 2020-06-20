@@ -97,5 +97,18 @@ namespace BizarreBazaar.Controllers
             return Ok(searchedUser);
         }
 
+        //api/user/email
+        [HttpGet("/email/{email}")]
+        public IActionResult GetUserByEmail (string email)
+        {
+            var userEmail = _repository.GetUserByEmail(email);
+            if (userEmail == null)
+            {
+                return NotFound("Sorry but that email doesn't exist.");
+            }
+
+            return Ok(userEmail);
+        }
+
     }
 }

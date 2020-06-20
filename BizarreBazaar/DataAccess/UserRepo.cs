@@ -109,5 +109,20 @@ namespace BizarreBazaar.DataAccess
 
         }
 
+        public User GetUserByEmail  (string email)
+        {
+            var sql = @"select *
+	                    from [user]
+	                    where email = @email
+	                    and acctactive = 1
+                        ";
+
+            var parameters = new { Email = email };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.QueryFirstOrDefault<User>(sql, parameters);
+            }
+        }
+
     }
 }
