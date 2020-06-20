@@ -60,3 +60,20 @@
 .add-to-cart-button {
     float: right;
 }
+
+.stock-level {
+    font-size: 1.15em;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.over-five {
+    color: green;
+}
+
+.few-left {
+    color: rgb(253, 152, 0);
+}
+
+.one-left {
+    color: red;
+}

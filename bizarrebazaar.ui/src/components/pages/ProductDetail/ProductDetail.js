@@ -47,11 +47,14 @@ class ProductDetail extends React.Component {
           <div className="price-and-button">
           <h1 className="price">${product.price}</h1>
             <Button variant="contained"
-                  color="primary"
+                  color={`${product.quantity === 0 ? 'disabled' : 'primary'}`}
                   size="large"
                   className="add-to-cart-button"
-                  > Add To Cart</Button>
+    > {product.quantity === 0 ? 'Out Of Stock' : 'Add To Cart' } </Button>
           </div>
+          <sub className={`stock-level ${product.quantity >= 5 ? 'over-five' : ''} ${product.quantity > 1 && product.quantity < 5 && product.quantity > 0 ? 'few-left' : ''} ${product.quantity === 1 ? 'one-left' : ''}`}>
+          {product.quantity >= 5 ? 'Plenty in stock.' : ''}{product.quantity < 5 && product.quantity > 0 ? `Only ${product.quantity} left in stock!` : ''}
+          </sub>
         </div>
       </div>
     );
