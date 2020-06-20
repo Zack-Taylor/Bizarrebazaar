@@ -85,6 +85,20 @@ namespace BizarreBazaar.DataAccess
             
         }
 
+        public IEnumerable<Product> GetProductsByProductTypeId(int productTypeId)
+        {
+            var sql = @"select * 
+                        from Product
+                        where ProductTypeId = @productTypeId
+                        and isActive = 1";
+
+            var parameters = new { ProductTypeId = productTypeId };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Product>(sql, parameters);
+            }
+        }
+
 
     }
 }
