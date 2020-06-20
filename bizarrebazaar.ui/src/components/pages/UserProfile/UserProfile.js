@@ -1,6 +1,10 @@
 import React from 'react';
+import '@fortawesome/react-fontawesome';
 import M from 'materialize-css/dist/css/materialize.min.css';
+import './UserProfile.scss';
+
 import userData from '../../../helpers/data/userData';
+// import { AutoInit } from 'materialize-css';
 
 class UserProfile extends React.Component {
   state = {
@@ -9,7 +13,6 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     this.setUserToState(3);
-    // M.Collapsible.init(this.Collapsible);
   }
 
   setUserToState = (uid) => {
@@ -19,9 +22,17 @@ class UserProfile extends React.Component {
   }
 
   clickEvent = (e) => {
-    e.preventDefault();
-    M.Collapsible.onclick();
+    const elem = document.querySelector('.collapsible.expandable');
+    const instance = M.Collapsible.init(elem, {
+      accordion: false,
+    });
+    instance.onclick(e);
   }
+
+  // clickEvent = (e) => {
+  //   e.preventDefault();
+  //   const { instance } = this.props;
+  // }
 
   render() {
     const { user } = this.state;
@@ -29,22 +40,22 @@ class UserProfile extends React.Component {
     return (
     <div>
       <div>
-        <img src= {user.imageUrl} alt="avatar pic" class= "circle responsive-img" />
+        <img src= {user.imageUrl} alt="avatar pic" className= "circle avatar" />
       </div>
 
-      <div class="document" >
-        <ul class="collapsible">
+      <div className="userInfo" >
+        <ul className="collapsible expandable">
           <li>
-            <div class="collapsible-header"><i class="fa fa-user-circle" aria-hidden="true"></i>UserName</div>
-            <div class="collapsible-body"><span>{user.userName}</span></div>
+            <div className="collapsible-header"><i className="fa fa-user-circle fa-3x" aria-hidden="true"></i>UserName</div>
+            <div className="collapsible-body"><span>{user.userName}</span></div>
           </li>
           <li>
-            <div class="collapsible-header"><i class="fa fa-at" aria-hidden="true"></i>Email</div>
-            <div class="collapsible-body"><span>{user.email}</span></div>
+            <div className="collapsible-header"><i className="fa fa-at fa-3x" aria-hidden="true"></i>Email</div>
+            <div className="collapsible-body"><span>{user.email}</span></div>
           </li>
           <li>
-            <div class="collapsible-header"><i class="fa fa-asterisk" aria-hidden="true"></i>Password</div>
-            <div class="collapsible-body"><span>{user.password}</span></div>
+            <div className="collapsible-header"><i className="fa fa-asterisk fa-3x" aria-hidden="true"></i>Password</div>
+            <div className="collapsible-body"><span>{user.password}</span></div>
           </li>
         </ul>
       </div>
