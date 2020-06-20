@@ -45,7 +45,7 @@ const getUserByUid = (uid) => new Promise((resolve, reject) => {
 
 const getUserByName = (userName) => axios.get(`${baseUrl}/user/username/${userName}`);
 
-const GetUserByEmail = (email) => axios.get(`${baseUrl}/user/email`, email);
+const GetUserByEmail = (email) => axios.get(`${baseUrl}/user/email/${email}`);
 
 // get user by email to compare when componentdidmount runs in app.js
 // have firebaseobj (userObj) databaseobj is currentUser

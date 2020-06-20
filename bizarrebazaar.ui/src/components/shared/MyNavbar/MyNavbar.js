@@ -19,7 +19,7 @@ class MyNavbar extends React.Component {
   };
 
   render() {
-    const { authed, userObj } = this.props;
+    const { authed, internalUserId } = this.props;
     return (
       <Navbar className="navbar">
         <Navbar.Brand>
@@ -32,7 +32,7 @@ class MyNavbar extends React.Component {
         <Nav className="options ml-auto">
           <Link className='option' to='/product'>SHOP</Link>
           <Link className='option' to='/product'>CATEGORIES</Link>
-          {userObj == undefined ? <></> : <Link className='profile' to={`/userProfile/:${userObj.id}`}>PROFILE</Link>}
+          <Link className='profile' to={`/userProfile/${internalUserId}`}>PROFILE</Link>
           <div className='option'><FontAwesomeIcon icon={faShoppingCart} /></div>
 
           {authed ? (

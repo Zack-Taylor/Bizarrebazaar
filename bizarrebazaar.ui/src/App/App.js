@@ -32,23 +32,23 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 
 class App extends React.Component {
   state = {
-    userObj: email,
     authed: false,
-    currentUser: email,
   }
 
   componentDidMount() {
-    this.removeListener = firebase.auth().onAuthStateChanged((userObj) => {
+    this.removeListener = firebase.auth().onAuthStateChanged((firebaseUser) => {
       // fetch call
-      userData.GetUserByEmail(email);
-      const { currentUserObj } = this.state;
-      if (userObj) {
-        // call out to api/user by firebase email, ? internalUserId: currentUserObj.id
-        // pass this into the id space on my link
-        this.setState({ authed: true, userObj, currentUserObj });
-      } else {
-        this.setState({ authed: false });
-      }
+      userData.GetUserByEmail(firebaseUser.email)
+        .then((response) => {
+          const internalUserId = response.data.id;
+          if (firebaseUser) {
+            // call out to api/user by firebase email, ? internalUserId: currentUserObj.id
+            // pass this into the id space on my link
+            this.setState({ authed: true, firebaseUser, internalUserId });
+          } else {
+            this.setState({ authed: false });
+          }
+        });
     });
   }
 
@@ -57,12 +57,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, userObj } = this.state;
-    console.log(userObj);
+    const { authed, firebaseUser, internalUserId } = this.state;
     return (
       <div>
         <Router>
-          <MyNavbar authed={authed} userObj={userObj}/>
+          <MyNavbar authed={authed} internalUserId={internalUserId}/>
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
             <Route
@@ -78,7 +77,8 @@ class App extends React.Component {
             <Route path="/productTypes/:productTypeId" exact component={ProductsByCategory} authed={authed}/>
             <Route path="/productTypes/:productTypeId/productDetail/:productId" exact component={ProductDetail} authed={authed}/>
             <Route path="/product" exact component={ProductDetail} authed={authed}/>
-            <PrivateRoute path="/userProfile:id" exact component={UserProfile} authed={authed}/>
+            <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={firebaseUser}/>
+            <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
           </Switch>
         </Router>
       </div>
