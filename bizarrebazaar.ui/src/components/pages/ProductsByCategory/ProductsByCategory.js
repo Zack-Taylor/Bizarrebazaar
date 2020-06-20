@@ -2,7 +2,7 @@ import React from 'react';
 import productsByCategory from '../../../helpers/data/getProductsByCategoryData';
 import productTypes from '../../../helpers/data/productTypeData';
 import './ProductsByCategory.scss';
-import ProductDetail from '../ProductDetail/ProductDetail';
+import Product from '../../shared/Product/Product';
 
 class ProductsByCategory extends React.Component {
   state = {
@@ -29,14 +29,14 @@ class ProductsByCategory extends React.Component {
   render() {
     const {
       productType,
-      product,
+      products,
     } = this.state;
 
     return (
       <div className="ProductsByCategory">
         <h1 className="productTypeName">{productType.name}</h1>
-        <div className="products d-flex flex-wrap">
-          { this.state.product.map((p) => <ProductDetail key={product.productId} product={p}/>)}
+        <div className="productCardSection">
+          {products == null ? [] : products.map((product) => <Product key={product.productId} product={product} />) };
         </div>
       </div>
     );
