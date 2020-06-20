@@ -11,7 +11,8 @@ class ProductDetail extends React.Component {
   };
 
   componentDidMount() {
-    this.getProductandProductType(30);
+    const { productId } = this.props.match.params;
+    this.getProductandProductType(productId);
   }
 
   getProductandProductType = (productId) => {
