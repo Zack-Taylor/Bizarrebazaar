@@ -1,8 +1,9 @@
 import React from 'react';
+import Divider from '@material-ui/core/Divider';
 import productData from '../../../helpers/data/productData';
 import productTypeData from '../../../helpers/data/productTypeData';
 import './ProductsByCategory.scss';
-import Product from '../../shared/Product/Product';
+import ProductCard from '../../shared/ProductCard/ProductCard';
 
 class ProductsByCategory extends React.Component {
   state = {
@@ -33,11 +34,13 @@ class ProductsByCategory extends React.Component {
     } = this.state;
 
     return (
-      <div className="ProductsByCategory">
-        <h1 className="productTypeName">{productType.name}</h1>
-        <div className="productCardSection">
-          {products == null ? [] : products.map((product) => <Product key={product.id} product={product} />) }
+      <div className="products-outer-container">
+        <h1 className="product-type-name">{productType.name}</h1>
+        <Divider></Divider>
+        <div className="product-card-container">
+          {products == null ? [] : products.map((product) => <ProductCard key={product.id} product={product} />) }
         </div>
+        <div className="color-block">a</div>
       </div>
     );
   }
