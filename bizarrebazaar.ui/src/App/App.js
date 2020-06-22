@@ -40,11 +40,11 @@ class App extends React.Component {
       // fetch call
       userData.GetUserByEmail(firebaseUser.email)
         .then((response) => {
-          const internalUserId = response.data.id;
+          const internalUser = response.data;
           if (firebaseUser) {
             // call out to api/user by firebase email, ? internalUserId: currentUserObj.id
             // pass this into the id space on my link
-            this.setState({ authed: true, firebaseUser, internalUserId });
+            this.setState({ authed: true, firebaseUser, internalUser });
           } else {
             this.setState({ authed: false });
           }
@@ -57,11 +57,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, firebaseUser, internalUserId } = this.state;
+    const { authed, firebaseUser, internalUser } = this.state;
     return (
       <div>
         <Router>
-          <MyNavbar authed={authed} internalUserId={internalUserId}/>
+          <MyNavbar authed={authed} internalUserId={internalUser.id}/>
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
             <Route
@@ -77,7 +77,7 @@ class App extends React.Component {
             <Route path="/productTypes/:productTypeId" exact component={ProductsByCategory} authed={authed}/>
             <Route path="/productTypes/:productTypeId/productDetail/:productId" exact component={ProductDetail} authed={authed}/>
             <Route path="/product" exact component={ProductDetail} authed={authed}/>
-            <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={firebaseUser}/>
+            <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={internalUser}/>
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
           </Switch>
         </Router>

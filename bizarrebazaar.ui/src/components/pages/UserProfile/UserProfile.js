@@ -1,5 +1,7 @@
 import React from 'react';
-import firebase from 'firebase/app';
+import { Transition } from 'react-transition-group';
+import PropTypes from 'prop-types';
+// import firebase from 'firebase/app';
 import 'firebase/auth';
 import {
   Collapse,
@@ -9,25 +11,39 @@ import {
 } from 'reactstrap';
 import './UserProfile.scss';
 
-import userData from '../../../helpers/data/userData';
+// import userData from '../../../helpers/data/userData';
 
 class UserProfile extends React.Component {
   state = {
     isOpen: false,
-    setIsOpen: false,
   }
-  // const [isOpen, setIsOpen] = useState(false);
 
-  clickEvent = (props) => {
-    const toggle = () => this.setState({ setIsOpen: true });
+  propTypes = {
+    ...Transition.propTypes,
+    isOpen: PropTypes.bool,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    className: PropTypes.node,
+    navbar: PropTypes.bool,
+    cssModule: PropTypes.object,
+    innerRef: PropTypes.object,
+  };
+
+  toggle = () => {
+    const toggleEvent = () => setIsOpen(!isOpen);
+    const [isOpen, setIsOpen] = toggleEvent(true);
   }
 
   render() {
     const { toggle, isOpen } = this.state;
     const { userObj } = this.props;
+
     return (
     <div>
-        <div>
+        <div className= "Collapse 1">
           <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Username</Button>
           <Collapse isOpen={isOpen}>
             <Card>
