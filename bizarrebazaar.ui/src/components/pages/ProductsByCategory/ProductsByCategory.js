@@ -1,6 +1,6 @@
 import React from 'react';
-import productsByCategory from '../../../helpers/data/getProductsByCategoryData';
-import productTypes from '../../../helpers/data/productTypeData';
+import productData from '../../../helpers/data/productData';
+import productTypeData from '../../../helpers/data/productTypeData';
 import './ProductsByCategory.scss';
 import Product from '../../shared/Product/Product';
 
@@ -11,14 +11,14 @@ class ProductsByCategory extends React.Component {
   }
 
   getProductData = (ProductTypeId) => {
-    productsByCategory.getProductsByCategory(ProductTypeId)
+    productData.getProductsByCategory(ProductTypeId)
       .then((products) => this.setState({ products }))
       .catch((err) => console.error('error in get products by category', err));
   }
 
   componentDidMount() {
     const { productTypeId } = this.props.match.params;
-    productTypes.getProductTypeById(productTypeId)
+    productTypeData.getProductTypeById(productTypeId)
       .then((response) => {
         this.setState({ productType: response.data });
         this.getProductData(productTypeId);
