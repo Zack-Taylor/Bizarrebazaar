@@ -32,7 +32,6 @@ class ProductsByCategory extends React.Component {
       productType,
       products,
     } = this.state;
-
     return (
       <div className="products-outer-container">
         <h1 className="product-type-name">{productType.name}</h1>
