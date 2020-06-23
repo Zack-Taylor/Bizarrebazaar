@@ -69,5 +69,21 @@ namespace BizarreBazaar.Controllers
 
             return Ok(searchedItem);
         }
+
+        [HttpGet("productTypeId/{id}")]
+        public IActionResult GetProductsByProductTypeId(int id)
+        {
+            var allProductsByProductType= _repository.GetProductsByProductTypeId(id);
+
+            return Ok(allProductsByProductType);
+        }
+
+        [HttpGet("twentynewest")]
+        public IActionResult GetTop20NewestProducts()
+        {
+            var result = _repository.GetTop20NewestProducts();
+
+            return Ok(result);
+        }
     }
 }

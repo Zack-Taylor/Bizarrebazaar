@@ -7,6 +7,7 @@ using BizarreBazaar.Models;
 using Dapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
+using BizarreBazaar.Models.ViewModels;
 
 namespace BizarreBazaar.DataAccess
 {
@@ -83,6 +84,35 @@ namespace BizarreBazaar.DataAccess
                 return db.Query<Product>(sql, parameters);
             }
             
+        }
+
+        public IEnumerable<Product> GetProductsByProductTypeId(int productTypeId)
+        {
+            var sql = @"select * 
+                        from Product
+                        where ProductTypeId = @productTypeId
+                        and isActive = 1";
+
+            var parameters = new { ProductTypeId = productTypeId };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Product>(sql, parameters);
+            }
+        }
+
+        public IEnumerable<Product> GetTop20NewestProducts()
+        {
+            var sql = @"Select TOP(20) Id, Title, Price, ImageUrl, DateAdded
+                        FROM Product
+                        WHERE isActive = 1
+                        ORDER BY DateAdded DESC";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var products = db.Query<Product>(sql);
+
+                return products;
+            }
         }
 
 

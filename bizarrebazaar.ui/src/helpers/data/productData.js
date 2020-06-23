@@ -7,4 +7,16 @@ const getProductById = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getProductById };
+const getProductsByCategory = (id) => new Promise((resolve, reject) => {
+  axios.get(`${constants.baseUrl}/product/productTypeId/${id}`)
+    .then((result) => resolve(result.data))
+    .catch((error) => reject(error));
+});
+
+const topTwentyNewest = (id) => new Promise((resolve, reject) => {
+  axios.get(`${constants.baseUrl}/product/twentynewest`)
+    .then((result) => resolve(result.data))
+    .catch((error) => reject(error));
+});
+
+export default { getProductById, getProductsByCategory, topTwentyNewest };
