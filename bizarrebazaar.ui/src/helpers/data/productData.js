@@ -13,4 +13,10 @@ const getProductsByCategory = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getProductById, getProductsByCategory };
+const topTwentyNewest = (id) => new Promise((resolve, reject) => {
+  axios.get(`${constants.baseUrl}/product/newest`)
+    .then((result) => resolve(result.data))
+    .catch((error) => reject(error));
+});
+
+export default { getProductById, getProductsByCategory, topTwentyNewest };
