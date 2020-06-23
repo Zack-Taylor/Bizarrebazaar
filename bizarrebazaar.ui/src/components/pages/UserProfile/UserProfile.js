@@ -1,6 +1,5 @@
 import React from 'react';
 import 'firebase/auth';
-import './UserProfile.scss';
 
 class UserProfile extends React.Component {
   state = {
