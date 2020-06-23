@@ -33,6 +33,8 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 class App extends React.Component {
   state = {
     authed: false,
+    internalUser: {},
+    firebaseUser: {},
   }
 
   componentDidMount() {
@@ -61,7 +63,7 @@ class App extends React.Component {
     return (
       <div>
         <Router>
-          <MyNavbar authed={authed} internalUserId={internalUser.id}/>
+          <MyNavbar authed={authed} internalUserId={internalUser?.id} />
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
             <Route
