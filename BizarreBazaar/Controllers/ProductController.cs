@@ -78,7 +78,7 @@ namespace BizarreBazaar.Controllers
             return Ok(allProductsByProductType);
         }
 
-        [HttpGet("newest")]
+        [HttpGet("twentynewest")]
         public IActionResult GetTop20NewestProducts()
         {
             var result = _repository.GetTop20NewestProducts();

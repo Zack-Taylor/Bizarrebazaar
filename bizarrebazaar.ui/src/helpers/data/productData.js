@@ -14,7 +14,7 @@ const getProductsByCategory = (id) => new Promise((resolve, reject) => {
 });
 
 const topTwentyNewest = (id) => new Promise((resolve, reject) => {
-  axios.get(`${constants.baseUrl}/product/newest`)
+  axios.get(`${constants.baseUrl}/product/twentynewest`)
     .then((result) => resolve(result.data))
     .catch((error) => reject(error));
 });
