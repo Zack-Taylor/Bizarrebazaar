@@ -11,7 +11,7 @@ import logo from '../../../assets/owl.png';
 import './MyNavbar.scss';
 
 class MyNavbar extends React.Component {
-  state = { }
+  state = {}
 
   logMeOut = (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ class MyNavbar extends React.Component {
   };
 
   render() {
-    const { authed } = this.props;
+    const { authed, internalUserId } = this.props;
     return (
       <Navbar className="navbar">
         <Navbar.Brand>
@@ -32,6 +32,7 @@ class MyNavbar extends React.Component {
         <Nav className="options ml-auto">
           <Link className='option' to='/product'>SHOP</Link>
           <Link className='option' to='/product'>CATEGORIES</Link>
+          <Link className='profile' to={`/userProfile/${internalUserId}`}>PROFILE</Link>
           <div className='option'><FontAwesomeIcon icon={faShoppingCart} /></div>
 
           {authed ? (
@@ -40,7 +41,7 @@ class MyNavbar extends React.Component {
 
           ) : (
 
-            <div className="option"><Link to='/auth'><FontAwesomeIcon icon={faUserAlt} className='user-icon' /></Link></div>
+              <div className="option"><Link to='/auth'><FontAwesomeIcon icon={faUserAlt} className='user-icon' /></Link></div>
 
           )
         }
