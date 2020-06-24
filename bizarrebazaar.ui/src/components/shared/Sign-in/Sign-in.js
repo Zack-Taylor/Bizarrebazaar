@@ -19,7 +19,7 @@ class SignIn extends React.Component {
         const { email, password } = this.state;
         userData.loginUser(email, password)
           .then(() => {
-            // this.props.history.push('/home');
+            this.props.history.push('/home');
             console.error('this works');
           })
           .catch((error) => {

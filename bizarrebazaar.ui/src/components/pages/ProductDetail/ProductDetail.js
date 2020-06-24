@@ -46,7 +46,7 @@ class ProductDetail extends React.Component {
           <sub className="filed-under">Filed under: {productType.name}</sub>
           <p className="description">{product.description}</p>
           <div className="price-and-button">
-          <h1 className="price">${product.price}</h1>
+          <h1 className="price">${parseFloat(product.price).toLocaleString('en')}</h1>
             <Button variant="contained"
                   color={`${product.quantity === 0 ? 'disabled' : 'primary'}`}
                   size="large"

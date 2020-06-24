@@ -27,7 +27,7 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
-        public IEnumerable<User> GetUserById(int uid)
+        public User GetUserById(int uid)
         {
             var sql = @"select *
                         from [user]
@@ -37,7 +37,7 @@ namespace BizarreBazaar.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 var parameters = new {Uid = uid};
-                var result = db.Query<User>(sql, parameters);
+                var result = db.QueryFirstOrDefault<User>(sql, parameters);
                 return result;
             }
         }
@@ -107,6 +107,21 @@ namespace BizarreBazaar.DataAccess
                 return db.Query<User>(sql, parameters);
             }
 
+        }
+
+        public User GetUserByEmail  (string email)
+        {
+            var sql = @"select *
+	                    from [user]
+	                    where email = @email
+	                    and acctactive = 1
+                        ";
+
+            var parameters = new { Email = email };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.QueryFirstOrDefault<User>(sql, parameters);
+            }
         }
 
     }
