@@ -39,7 +39,6 @@ class ProductsByCategory extends React.Component {
         <div className="product-card-container">
           {products == null ? [] : products.map((product) => <ProductCard key={product.id} product={product} />) }
         </div>
-        <div className="color-block"></div>
       </div>
     );
   }
