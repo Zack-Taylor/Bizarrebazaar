@@ -14,6 +14,8 @@ import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 import ProductTypes from '../components/pages/ProductTypes/ProductTypes';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
+import Example from '../components/shared/NewNav/NewNav';
+import Material from '../components/shared/Material/Material';
 import './App.scss';
 
 firebaseConnection();
@@ -52,12 +54,13 @@ class App extends React.Component {
       <div>
         <Router>
           <MyNavbar authed={authed} userObj={userObj}/>
+          <Material/>
           <Switch>
-            <Route path="/home" exact component={Home} authed={authed}/>
+            <Route path="/" exact component={Home} authed={authed}/>
             <Route
             path='/auth'
             render={() => (authed ? (
-                <Redirect to='/home' />
+                <Redirect to='/' />
             ) : (
                 <Auth />
             ))
