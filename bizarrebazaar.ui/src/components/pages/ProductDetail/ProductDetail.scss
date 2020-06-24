@@ -42,6 +42,24 @@
 .description {
     font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
+    margin-bottom: 1em;
+}
+
+.sold-by-container {
+    display: flex;
+    align-items: baseline;
+}
+
+.sold-by {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    margin-right: 0.5em;
+}
+
+.sold-by-username {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
 }
 
 .price-and-button {

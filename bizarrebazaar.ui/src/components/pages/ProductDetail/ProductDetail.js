@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 import productData from '../../../helpers/data/productData';
 import productTypeData from '../../../helpers/data/productTypeData';
 import './ProductDetail.scss';
@@ -45,16 +46,42 @@ class ProductDetail extends React.Component {
           <h1 className="product-title">{product.title}</h1>
           <sub className="filed-under">Filed under: {productType.name}</sub>
           <p className="description">{product.description}</p>
-          <div className="price-and-button">
-          <h1 className="price">${parseFloat(product.price).toLocaleString('en')}</h1>
-            <Button variant="contained"
-                  color={`${product.quantity === 0 ? 'disabled' : 'primary'}`}
-                  size="large"
-                  className="add-to-cart-button"
-    > {product.quantity === 0 ? 'Out Of Stock' : 'Add To Cart' } </Button>
+          <div className="sold-by-container">
+            <p className="sold-by">Sold By:</p>
+            <Link style={ { 'text-decoration': 'none' } } className="sold-by-username" to={'/itemsBySeller/someId'}>
+              Professor Oak
+            </Link>
           </div>
-          <sub className={`stock-level ${product.quantity >= 5 ? 'over-five' : ''} ${product.quantity > 1 && product.quantity < 5 && product.quantity > 0 ? 'few-left' : ''} ${product.quantity === 1 ? 'one-left' : ''}`}>
-          {product.quantity >= 5 ? 'Plenty in stock.' : ''}{product.quantity < 5 && product.quantity > 0 ? `Only ${product.quantity} left in stock!` : ''}
+
+          <div className="price-and-button">
+            <h1 className="price">
+              ${parseFloat(product.price).toLocaleString('en')}
+            </h1>
+            <Button
+              variant="contained"
+              color={`${product.quantity === 0 ? 'disabled' : 'primary'}`}
+              size="large"
+              className="add-to-cart-button"
+            >
+              {' '}
+              {product.quantity === 0 ? 'Out Of Stock' : 'Add To Cart'}{' '}
+            </Button>
+          </div>
+          <sub
+            className={`stock-level ${
+              product.quantity >= 5 ? 'over-five' : ''
+            } ${
+              product.quantity > 1 &&
+              product.quantity < 5 &&
+              product.quantity > 0
+                ? 'few-left'
+                : ''
+            } ${product.quantity === 1 ? 'one-left' : ''}`}
+          >
+            {product.quantity >= 5 ? 'Plenty in stock.' : ''}
+            {product.quantity < 5 && product.quantity > 0
+              ? `Only ${product.quantity} left in stock!`
+              : ''}
           </sub>
         </div>
       </div>
