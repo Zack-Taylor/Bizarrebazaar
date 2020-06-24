@@ -65,11 +65,11 @@ class App extends React.Component {
         <Router>
           <MyNavbar authed={authed} internalUserId={internalUser?.id} />
           <Switch>
-            <Route path="/" exact component={Home} authed={authed}/>
+            <Route path="/home" exact component={Home} authed={authed}/>
             <Route
             path='/auth'
             render={() => (authed ? (
-                <Redirect to='/' />
+                <Redirect to='/home' />
             ) : (
                 <Auth />
             ))
