@@ -26,7 +26,7 @@ class MyNavbar extends React.Component {
     return (
       <Navbar className="navbar">
         <Navbar.Brand>
-          <Link className='logo-container' to='/home'>
+          <Link className='logo-container' to='/'>
             <img src={logo} className='logo-nav' alt='logo'/>
           </Link>
         </Navbar.Brand>
