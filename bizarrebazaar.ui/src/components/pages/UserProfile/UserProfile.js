@@ -1,5 +1,6 @@
 import React from 'react';
 import 'firebase/auth';
+import './UserProfile.scss';
 
 class UserProfile extends React.Component {
   state = {
@@ -11,11 +12,17 @@ class UserProfile extends React.Component {
 
     return (
       <div>
-        <ul>
-          <li>{userObj.userName}</li>
-          <li>{userObj.email}</li>
-          <li>{userObj.password}</li>
-        </ul>
+        <h1>Welcome, {userObj.firstName}!</h1>
+        <div className="userInfo">
+          <img alt={userObj.lastName} src={userObj.imageUrl} className="userImage" />
+          <div>
+            <ul>
+              <li>{userObj.userName}</li>
+              <li>{userObj.email}</li>
+              <li>{userObj.password}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
