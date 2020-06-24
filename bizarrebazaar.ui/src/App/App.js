@@ -10,10 +10,13 @@ import 'firebase/auth';
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
+
+import UserProfile from '../components/pages/UserProfile/UserProfile';
 import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 import ProductTypes from '../components/pages/ProductTypes/ProductTypes';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
+import userData from '../helpers/data/userData';
 import './App.scss';
 
 firebaseConnection();
@@ -30,15 +33,24 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 class App extends React.Component {
   state = {
     authed: false,
+    internalUser: {},
+    firebaseUser: {},
   }
 
   componentDidMount() {
-    this.removeListener = firebase.auth().onAuthStateChanged((userObj) => {
-      if (userObj) {
-        this.setState({ authed: true, userObj });
-      } else {
-        this.setState({ authed: false });
-      }
+    this.removeListener = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      // fetch call
+      userData.GetUserByEmail(firebaseUser.email)
+        .then((response) => {
+          const internalUser = response.data;
+          if (firebaseUser) {
+            // call out to api/user by firebase email, ? internalUserId: currentUserObj.id
+            // pass this into the id space on my link
+            this.setState({ authed: true, firebaseUser, internalUser });
+          } else {
+            this.setState({ authed: false });
+          }
+        });
     });
   }
 
@@ -47,11 +59,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, userObj } = this.state;
+    const { authed, firebaseUser, internalUser } = this.state;
     return (
       <div>
         <Router>
-          <MyNavbar authed={authed} userObj={userObj}/>
+          <MyNavbar authed={authed} internalUserId={internalUser?.id} />
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
             <Route
@@ -65,7 +77,7 @@ class App extends React.Component {
           />
             <Route path="/productTypes" exact component={ProductTypes} authed={authed}/>
             <Route path="/productTypes/:productTypeId" exact component={ProductsByCategory} authed={authed}/>
-            <Route path="/productTypes/:productTypeId/productDetail/:productId" exact component={ProductDetail} authed={authed}/>
+            <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={internalUser} />
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
           </Switch>
         </Router>

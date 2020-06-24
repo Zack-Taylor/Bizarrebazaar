@@ -36,8 +36,7 @@ namespace BizarreBazaar.Controllers
         
         {
             var user = _repository.GetUserById(uid);
-            var isEmpty = !user.Any();
-            if (isEmpty)
+            if (user == null)
             {
                 return NotFound("Sorry, this user does not exist.");
             }
@@ -96,6 +95,19 @@ namespace BizarreBazaar.Controllers
             }
 
             return Ok(searchedUser);
+        }
+
+        //api/user/email/
+        [HttpGet("email/{email}")]
+        public IActionResult GetUserByEmail (string email)
+        {
+            var userEmail = _repository.GetUserByEmail(email);
+            if (userEmail == null)
+            {
+                return NotFound("Sorry but that email doesn't exist.");
+            }
+
+            return Ok(userEmail);
         }
 
     }
