@@ -31,6 +31,13 @@ class ProductDetail extends React.Component {
       .catch((error) => console.error('error getting that product type, ', error));
   };
 
+  getAndSetSellerToState = (userId) => {
+    userData
+      .getProductById(productId)
+      .then((result) => this.setProductAndProductTypeToState(result.data))
+      .catch((error) => console.error('error getting that product, ', error));
+  };
+
   render() {
     const { product, productType } = this.state;
     return (
