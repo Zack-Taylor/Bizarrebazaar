@@ -31,13 +31,6 @@ class ProductDetail extends React.Component {
       .catch((error) => console.error('error getting that product type, ', error));
   };
 
-  getAndSetSellerToState = (userId) => {
-    userData
-      .getProductById(productId)
-      .then((result) => this.setProductAndProductTypeToState(result.data))
-      .catch((error) => console.error('error getting that product, ', error));
-  };
-
   render() {
     const { product, productType } = this.state;
     return (
@@ -78,9 +71,9 @@ class ProductDetail extends React.Component {
             className={`stock-level ${
               product.quantity >= 5 ? 'over-five' : ''
             } ${
-              product.quantity > 1 &&
-              product.quantity < 5 &&
-              product.quantity > 0
+              product.quantity > 1
+              && product.quantity < 5
+              && product.quantity > 0
                 ? 'few-left'
                 : ''
             } ${product.quantity === 1 ? 'one-left' : ''}`}
