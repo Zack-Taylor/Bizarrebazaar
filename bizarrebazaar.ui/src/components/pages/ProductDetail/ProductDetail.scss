@@ -32,11 +32,23 @@
     font-family: 'Cinzel', serif;
 }
 
+.filed-under-container {
+    display: flex;
+    align-items: baseline;
+}
+
 .filed-under {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: medium;
+    font-size: 1em;
     margin-bottom: 3em;
+    margin-right: 0.5em;    
+}
+
+.filed-under-category {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+    font-style: italic;
 }
 
 .description {
@@ -60,6 +72,7 @@
 .sold-by-username {
     font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
+    font-style: italic;
 }
 
 .price-and-button {
