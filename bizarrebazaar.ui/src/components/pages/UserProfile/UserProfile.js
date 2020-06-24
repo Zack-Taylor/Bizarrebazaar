@@ -12,7 +12,7 @@ class UserProfile extends React.Component {
 
     return (
       <div>
-        <h1>Welcome, {userObj.firstName}!</h1>
+        <h1 className="user-profile-header">Welcome, {userObj.firstName}!</h1>
         <div className="userInfo">
           <img alt={userObj.lastName} src={userObj.imageUrl} className="userImage" />
           <div>
