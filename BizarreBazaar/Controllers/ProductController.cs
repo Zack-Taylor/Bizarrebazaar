@@ -85,5 +85,17 @@ namespace BizarreBazaar.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("topthree/{productTypeId}")]
+        public IActionResult GetTopThree(int productTypeId)
+        {
+            var result = _repository.GetTopThree(productTypeId);
+            if (result.Count() == 0)
+            {
+                return NotFound("Couldn't find products with that product type");
+            }
+            return Ok(result);
+        }
+
     }
 }
