@@ -10,6 +10,7 @@ import 'firebase/auth';
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
+import Shop from '../components/pages/Shop/Shop';
 import UserProfile from '../components/pages/UserProfile/UserProfile';
 import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 import ProductTypes from '../components/pages/ProductTypes/ProductTypes';
@@ -80,6 +81,7 @@ class App extends React.Component {
             <Route path="/SellerStore/:userId" exact component={SellerStore} authed={authed}/>
             <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={internalUser} />
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
+            <Route path="/shop" exact component={Shop} authed={authed}/>
           </Switch>
         </Router>
       </div>
