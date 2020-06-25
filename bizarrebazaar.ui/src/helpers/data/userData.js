@@ -47,13 +47,6 @@ const getUserByName = (userName) => axios.get(`${baseUrl}/user/username/${userNa
 
 const GetUserByEmail = (email) => axios.get(`${baseUrl}/user/email/${email}`);
 
-// get user by email to compare when componentdidmount runs in app.js
-// have firebaseobj (userObj) databaseobj is currentUser
-// compare fbuserobj email with currentuser email
-// make sure to have API return current user object if it is in the database
-// 1 create new fetch call in datafile
-// 2 create new method in userController in VS GetUserByEmail
-
 export default {
   loginUser, registerUser, loginWithGoogle, addUserToDatabase, getUserByUid, getUserByName, GetUserByEmail,
 };

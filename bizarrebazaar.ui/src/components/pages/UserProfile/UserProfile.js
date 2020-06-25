@@ -1,11 +1,14 @@
 import React from 'react';
 import 'firebase/auth';
 import './UserProfile.scss';
+import getProductsByUser from '../../../helpers/data/productData';
 
 class UserProfile extends React.Component {
   state = {
-    isOpen: false,
+    productData: getProductsByUser,
   }
+
+  sellerData = getProductsByUser(uid);
 
   render() {
     const { userObj } = this.props;
@@ -22,6 +25,9 @@ class UserProfile extends React.Component {
               <li>{userObj.password}</li>
             </ul>
           </div>
+        </div>
+        <div className="SellerInfo">
+          {getProductsByUser.response}
         </div>
       </div>
     );
