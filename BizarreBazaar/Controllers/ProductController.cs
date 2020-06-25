@@ -85,5 +85,12 @@ namespace BizarreBazaar.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("seller/{uid}")]
+        public IActionResult GetSellerProductQuantityByCategory(int uid)
+        {
+            var productQuantity = _repository.GetProductsByUserId(uid);
+            return Ok(productQuantity);
+        }
     }
 }
