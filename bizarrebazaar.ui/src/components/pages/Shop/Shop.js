@@ -1,39 +1,43 @@
 import './Shop.scss';
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
-import shopData from '../../../helpers/data/productData';
+import productData from '../../../helpers/data/productData';
 import productTypeData from '../../../helpers/data/productTypeData';
 import ProductCard from '../../shared/ProductCard/ProductCard';
 
 class Shop extends React.Component {
   state = {
-    productTypes: [],
-    product: {},
+    typesAndTopThree: [],
   }
 
-  // getTopThreeProducts = (productTypeId) => {
-  //   shopData.shopTopThree(productTypeId)
-  //     .then((productType) => this.setState(productType))
-  //     .catch((error) => console.error('error getting top three', error));
-  // };
+  returnTopThree = (productTypeId) => {
+    productData.shopTopThree(productTypeId)
+      .then((response) => response.data)
+      .catch((error) => console.error('error getting top three, ', error));
+  }
 
   componentDidMount() {
     productTypeData.getAllProductTypes()
       .then((response) => {
-        this.setState({ productTypes: response.data });
-        // this.getTopThreeProducts();
+        const objects = [];
+        response.data.map((prodType) => {
+          const topThree = this.returnTopThree(prodType.id);
+          const typeAndThree = {
+            typeName: prodType.name,
+            topThreeProducts: topThree,
+          };
+          objects.concat(typeAndThree);
+          this.setState({ typesAndTopThree: objects });
+        });
       })
       .catch((err) => console.error('error getting product types', err));
   }
 
   render() {
-    const {
-      productTypes,
-      products,
-    } = this.state;
+    const { typesAndTopThree } = this.state;
     return (
       <div className="products-outer-container">
-        <h1 className="product-type-name">{productTypes.name}</h1>
+        <h1 className="product-type-name">{typesAndTopThree[1]}</h1>
         <Divider></Divider>
         {/* <div className="product-card-container">
           {products == null ? [] : products.map((product) => <ProductCard key={product.id} product={product} />) }
