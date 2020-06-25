@@ -1,6 +1,7 @@
 import './Shop.scss';
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
+import ShopPageSection from '../../shared/ShopPageSection/ShopPageSection';
 import productData from '../../../helpers/data/productData';
 import productTypeData from '../../../helpers/data/productTypeData';
 
@@ -30,12 +31,8 @@ class Shop extends React.Component {
   render() {
     const { productsWithType } = this.state;
     return (
-      <div className="products-outer-container">
-        <h1 className="product-type-name"></h1>
-        <Divider></Divider>
-        {/* <div className="product-card-container">
-          {products == null ? [] : products.map((product) => <ProductCard key={product.id} product={product} />) }
-        </div> */}
+      <div className="shop-page-container">
+        { productsWithType.map((p) => <ShopPageSection key={p.productType} productsWithType={p} ></ShopPageSection>)}
       </div>
     );
   }
