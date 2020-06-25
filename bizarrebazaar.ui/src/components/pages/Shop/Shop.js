@@ -1,6 +1,5 @@
 import './Shop.scss';
 import React from 'react';
-import Divider from '@material-ui/core/Divider';
 import ShopPageSection from '../../shared/ShopPageSection/ShopPageSection';
 import productData from '../../../helpers/data/productData';
 import productTypeData from '../../../helpers/data/productTypeData';

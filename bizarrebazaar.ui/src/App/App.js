@@ -13,7 +13,6 @@ import Home from '../components/pages/Home/Home';
 import Shop from '../components/pages/Shop/Shop';
 import UserProfile from '../components/pages/UserProfile/UserProfile';
 import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
-import ProductTypes from '../components/pages/ProductTypes/ProductTypes';
 import SellerStore from '../components/pages/SellerStore/SellerStore';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
