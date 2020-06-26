@@ -16,9 +16,9 @@ class ShopPageSection extends React.Component {
                <Divider></Divider>
                <div className="shop-product-section">
                { productsWithType.products.map((product) => <ProductCard key={product.id} product={product}></ProductCard>) }
-               <div className="view-all-icon-section">
-               <Tooltip className="tooltip-on-icon" placement={'right'} title={`View all products listed as ${productsWithType.productType}`} arrow><Link style={{ textDecoration: 'none', color: 'black' }} to={`/productTypes/${productsWithType.products[0].productTypeId}`}><FontAwesomeIcon className="view-all-products-icon" icon={faArrowCircleRight}></FontAwesomeIcon></Link></Tooltip>
-               </div>
+               <Tooltip className="icon-section" placement={'right'} title={`View all products listed as ${productsWithType.productType}`} arrow>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/productTypes/${productsWithType.products[0].productTypeId}`}><FontAwesomeIcon className="view-all-products-icon" icon={faArrowCircleRight}></FontAwesomeIcon></Link>
+               </Tooltip>
                </div>
             </div>
     );
