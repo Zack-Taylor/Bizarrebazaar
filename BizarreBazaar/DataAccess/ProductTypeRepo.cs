@@ -66,6 +66,7 @@ namespace BizarreBazaar.DataAccess
                 var results = db.Query<ProductTypeSummary>(sql);
                 return results;
             }
+
         }
 
         public List<TopThreeProductInProductType> GetTopThreeProductsByType(string producttype)
@@ -86,6 +87,5 @@ namespace BizarreBazaar.DataAccess
                 return topthree;
             }
         }
-
     }
 }
