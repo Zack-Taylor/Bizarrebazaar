@@ -134,6 +134,7 @@ namespace BizarreBazaar.DataAccess
                 var results = db.Query<Product>(sql, parameters);
                 return results;
             }
+        }
 
         public IEnumerable<Product> GetTopThree(int productTypeId)
         {

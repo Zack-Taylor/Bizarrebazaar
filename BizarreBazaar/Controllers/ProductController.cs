@@ -92,6 +92,7 @@ namespace BizarreBazaar.Controllers
             var productQuantity = _repository.GetProductsByUserId(uid);
             return Ok(productQuantity);
         }
+
         [HttpGet("topthree/{productTypeId}")]
         public IActionResult GetTopThree(int productTypeId)
         {
