@@ -23,18 +23,8 @@ class ProductCard extends React.Component {
           <Link style={{ textDecoration: 'none', color: 'black' }} to={`/product/${product.id}`}>
               <h3 className="product-card-title">{product.title}</h3>
             </Link>
-            <div className='text-center'>
+          
               <h4 className="product-card-price">${parseFloat(product.price).toLocaleString('en')}</h4>
-              <Button
-              variant="contained"
-              color={`${product.quantity === 0 ? 'disabled' : 'primary'}`}
-              size="small"
-              className=""
-            >
-              {' '}
-              {product.quantity === 0 ? 'Out Of Stock' : 'Add To Cart'}{' '}
-            </Button>
-            </div>
       </Paper>
     );
   }
