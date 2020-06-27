@@ -8,16 +8,17 @@ import './SearchBox.scss';
 class SearchBox extends React.Component {
     state={
       products: [],
+      searchedProducts: [],
     }
 
     componentDidMount() {
-      this.getProducts();
       this.getAllProducts();
+      this.getProducts();
     }
 
     getProducts = () => {
       productData.getSearchProduct()
-        .then((products) => this.setState({ products }))
+        .then((searchedProducts) => this.setState({ searchedProducts }))
         .catch((err) => console.error('error in get search products', err));
     }
 
@@ -48,7 +49,8 @@ class SearchBox extends React.Component {
       } = this.state;
       return (
     <div className='searchPage'>
-      <h1 className='productTitle'>Products</h1>
+      <div className='text-center'>
+        <h1 className='productTitle'>PRODUCTS</h1>
         <div className='searchboxDiv'>
             <input
             type='text'
@@ -57,6 +59,7 @@ class SearchBox extends React.Component {
             onChange= {this.filterItems}
             />
         </div>
+      </div>
        
         <div className="looks container-fluid d-flex flex-wrap">
         {products == null ? [] : products.map((product) => <ProductCard key={product.id} product={product} />) }
