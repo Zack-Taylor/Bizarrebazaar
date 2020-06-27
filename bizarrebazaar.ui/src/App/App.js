@@ -17,6 +17,7 @@ import SellerStore from '../components/pages/SellerStore/SellerStore';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
 import userData from '../helpers/data/userData';
+import SearchBox from '../components/shared/SearchBox/SearchBox';
 import './App.scss';
 import SellerDashboard from '../components/pages/SellerDashboard/SellerDashboard';
 
@@ -82,6 +83,7 @@ class App extends React.Component {
             <PrivateRoute path="/sellerDashboard/:id" exact component={SellerDashboard} authed={authed} internalUser={internalUser} />
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
             <Route path="/shop" exact component={Shop} authed={authed}/>
+            <Route path="/search" exact component={SearchBox} authed={authed}/>
           </Switch>
         </Router>
       </div>

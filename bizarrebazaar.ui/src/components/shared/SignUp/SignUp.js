@@ -1,6 +1,4 @@
 import React from 'react';
-import moment from 'moment';
-import firebase from 'firebase/app';
 import 'firebase/auth';
 import userData from '../../../helpers/data/userData';
 import FormInput from '../FormInput/FormInput';
