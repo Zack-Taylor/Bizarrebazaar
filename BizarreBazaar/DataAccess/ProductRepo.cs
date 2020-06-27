@@ -49,7 +49,7 @@ namespace BizarreBazaar.DataAccess
                         where userId = @uid
                         and isActive = 1";
 
-            var parameters = new {Uid = uid};
+            var parameters = new { Uid = uid };
             using (var db = new SqlConnection(ConnectionString))
             {
                 return db.Query<Product>(sql, parameters);
@@ -72,18 +72,18 @@ namespace BizarreBazaar.DataAccess
 
         public IEnumerable<Product> GetSearchedProduct(string search)
         {
-            
+
             var sql = @"
                         select * from Product
                         where Product.Title like '%' + @search + '%' AND isActive = 1
                     ";
 
-            var parameters = new {Search = search};
+            var parameters = new { Search = search };
             using (var db = new SqlConnection(ConnectionString))
             {
                 return db.Query<Product>(sql, parameters);
             }
-            
+
         }
 
         public IEnumerable<Product> GetProductsByProductTypeId(int productTypeId)
@@ -115,6 +115,27 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        public IEnumerable<Product> GetSellerProductsByCategory(int id)
+        {
+            var sql = @"select sum(product.quantity) as TotalStockInCategory, productType.[name] as Category
+                        from product
+                        join productType on productType.id = product.producttypeId
+                        where userId = @id
+                        group by productType.[name]
+                        ";
+
+            var parameters = new
+            {
+                Id = id
+            };
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var results = db.Query<Product>(sql, parameters);
+                return results;
+            }
+        }
+
         public IEnumerable<Product> GetTopThree(int productTypeId)
         {
             var sql = @"select top(3) *
@@ -128,6 +149,26 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        //public IEnumerable<Product> GetSellerProductQuantitiesByCategory(int id)
+        //{
+        //    var sql = @"select sum(product.quantity) as TotalStockInCategory, productType.[name] as Category
+        //                from product
+        //                join productType on productType.id = product.producttypeId
+        //                where userId = @id
+        //                group by productType.[name]
+        //                ";
+
+        //    var parameters = new
+        //    {
+        //        Id = id
+        //    };
+
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var results = db.Query<Product>(sql, parameters);
+        //        return results;
+        //    }
+        //}
     }
 }
 

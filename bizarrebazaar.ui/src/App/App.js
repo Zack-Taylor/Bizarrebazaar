@@ -18,6 +18,7 @@ import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
 import userData from '../helpers/data/userData';
 import './App.scss';
+import SellerDashboard from '../components/pages/SellerDashboard/SellerDashboard';
 
 firebaseConnection();
 
@@ -78,6 +79,7 @@ class App extends React.Component {
             <Route path="/productTypes/:productTypeId" exact component={ProductsByCategory} authed={authed}/>
             <Route path="/SellerStore/:userId" exact component={SellerStore} authed={authed}/>
             <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={internalUser} />
+            <PrivateRoute path="/sellerDashboard/:id" exact component={SellerDashboard} authed={authed} internalUser={internalUser} />
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
             <Route path="/shop" exact component={Shop} authed={authed}/>
           </Switch>
