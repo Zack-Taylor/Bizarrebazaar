@@ -1,17 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import 'firebase/auth';
 import './UserProfile.scss';
-import getProductsByUser from '../../../helpers/data/productData';
+import userData from '../../../helpers/data/userData';
 
 class UserProfile extends React.Component {
   state = {
-    productData: getProductsByUser,
+    userObj: {},
   }
 
-  sellerData = getProductsByUser(uid);
+  componentDidMount() {
+    const { uid } = this.props.match.params;
+    userData.getUserByUid(uid);
+  }
+
+  // getUser(uid) {
+  //   userData.getUserByUid(uid)
+  //     .then((result) => this.setState({ user: result.data }))
+  //     .catch((error) => console.error('error getting user info', error));
+  // }
 
   render() {
-    const { userObj } = this.props;
+    const { userObj, uid } = this.state;
 
     return (
       <div>
@@ -25,9 +35,7 @@ class UserProfile extends React.Component {
               <li>{userObj.password}</li>
             </ul>
           </div>
-        </div>
-        <div className="SellerInfo">
-          {getProductsByUser.response}
+          <Link className="btn btn-success" to={`/sellerDashboard/${uid}`}>Seller Dashboard</Link>
         </div>
       </div>
     );
