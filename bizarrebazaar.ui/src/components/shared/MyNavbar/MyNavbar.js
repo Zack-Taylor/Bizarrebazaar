@@ -30,8 +30,7 @@ class MyNavbar extends React.Component {
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="options ml-auto">
-          <Link className='option' to='/product'>SHOP</Link>
-          <Link className='option' to='/product'>CATEGORIES</Link>
+          <Link className='option' to='/shop'>SHOP</Link>
           <Link className='profile' to={`/userProfile/${internalUserId}`}>PROFILE</Link>
           <div className='option'><FontAwesomeIcon icon={faShoppingCart} /></div>
 

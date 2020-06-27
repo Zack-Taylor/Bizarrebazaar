@@ -10,9 +10,9 @@ import 'firebase/auth';
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
+import Shop from '../components/pages/Shop/Shop';
 import UserProfile from '../components/pages/UserProfile/UserProfile';
 import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
-import ProductTypes from '../components/pages/ProductTypes/ProductTypes';
 import SellerStore from '../components/pages/SellerStore/SellerStore';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
@@ -75,11 +75,11 @@ class App extends React.Component {
             ))
             }
           />
-            <Route path="/productTypes" exact component={ProductTypes} authed={authed}/>
             <Route path="/productTypes/:productTypeId" exact component={ProductsByCategory} authed={authed}/>
             <Route path="/SellerStore/:userId" exact component={SellerStore} authed={authed}/>
             <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={internalUser} />
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
+            <Route path="/shop" exact component={Shop} authed={authed}/>
           </Switch>
         </Router>
       </div>
