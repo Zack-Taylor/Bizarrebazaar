@@ -9,9 +9,30 @@
   justify-content: left;
   justify-content: space-between;
   margin-left: 10%;
+  margin-top: 10%;
 }
 
 .userImage {
   height: 200px;
   width: 200px;
+  margin-bottom: 5%;
+}
+
+.btn-dashboard {
+  color: black;
+  box-shadow: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.containsButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

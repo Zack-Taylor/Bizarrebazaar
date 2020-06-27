@@ -39,7 +39,7 @@ const addUserToDatabase = (userObj) => axios.post(`${baseUrl}/user`, userObj);
 
 const getUserByUid = (uid) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/user/userId/${uid}`)
-    .then((result) => resolve(result.data))
+    .then((result) => resolve(result))
     .catch((error) => reject(error));
 });
 

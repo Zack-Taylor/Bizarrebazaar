@@ -6,36 +6,39 @@ import userData from '../../../helpers/data/userData';
 
 class UserProfile extends React.Component {
   state = {
-    userObj: {},
+    internalUser: {},
   }
 
   componentDidMount() {
-    const { uid } = this.props.match.params;
-    userData.getUserByUid(uid);
+    const { id } = this.props.match.params;
+    console.log(id);
+    this.getUser(id);
   }
 
-  // getUser(uid) {
-  //   userData.getUserByUid(uid)
-  //     .then((result) => this.setState({ user: result.data }))
-  //     .catch((error) => console.error('error getting user info', error));
-  // }
+  getUser(uid) {
+    userData.getUserByUid(uid)
+      .then((result) => this.setState({ internalUser: result.data }))
+      .catch((error) => console.error('error getting user info', error));
+  }
 
   render() {
-    const { userObj, uid } = this.state;
+    const { internalUser } = this.state;
 
     return (
       <div>
-        <h1 className="user-profile-header">Welcome, {userObj.firstName}!</h1>
+        <h1 className="user-profile-header">Welcome, {internalUser.firstName}!</h1>
         <div className="userInfo">
-          <img alt={userObj.lastName} src={userObj.imageUrl} className="userImage" />
+          <img alt={internalUser.lastName} src={internalUser.imageUrl} className="userImage" />
           <div>
             <ul>
-              <li>{userObj.userName}</li>
-              <li>{userObj.email}</li>
-              <li>{userObj.password}</li>
+              <li>{internalUser.userName}</li>
+              <li>{internalUser.email}</li>
+              <li>{internalUser.password}</li>
             </ul>
           </div>
-          <Link className="btn btn-success" to={`/sellerDashboard/${uid}`}>Seller Dashboard</Link>
+          <div className="containsButton">
+          <Link className="btn btn-success btn-dashboard" to={`/sellerDashboard/${internalUser.id}`}>Seller Dashboard</Link>
+          </div>
         </div>
       </div>
     );

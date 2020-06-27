@@ -1,49 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import './SellerDashboard.scss';
 import productData from '../../../helpers/data/productData';
 import userData from '../../../helpers/data/userData';
+import ProductCard from '../../shared/ProductCard/ProductCard';
 
 class SellerDashboard extends React.Component {
   state = {
-    product: {},
+    products: [],
     seller: {},
   }
 
   componentDidMount() {
-    const { uid } = this.props.match.params;
-    userData.getUserByUid(uid);
-    productData.getProductsByUser(uid);
+    const { id } = this.props.match.params;
+    this.getSeller(id);
+    this.getSellersProducts(id);
   }
 
-  getSeller(uid) {
-    userData.getUserByUid(uid)
+  getSeller(id) {
+    userData.getUserByUid(id)
       .then((result) => this.setState({ seller: result.data }))
       .catch((error) => console.error('error getting seller info', error));
   }
 
-  getSellersProducts() {
-    productData.getProductsByUser()
-      .then((result) => this.setState({ product: result.data }))
+  getSellersProducts(userId) {
+    productData.getProductsByUser(userId)
+      .then((result) => this.setState({ products: result.data }))
       .catch((error) => console.error('error getting product info', error));
   }
 
   render() {
-    const { product, seller } = this.state;
+    const { products, seller } = this.state;
 
     return (
-      <div>
-        <h1 className="dashboard-header">Welcome, {}!</h1>
+      <div className="page">
+        <h1 className="dashboard-header">Welcome, {seller.firstName}!</h1>
         <div className="dashboard">
-          <img alt={seller.lastName} src={seller.firstName} className="userImage" />
-          <div>
-            <ul>
-              <li>{product.title}</li>
-              <li>{product.quantity}</li>
-              <li>{product.price}</li>
+          <img alt={seller.lastName} src={seller.imageUrl} className="dashboardImage" />
+            <ul className="sellerData">
+              <li>{}</li>
+              <li>{}</li>
+              <li>{}</li>
             </ul>
-          </div>
-          <Link className="btn-btn-success" to={`/product/${product.id}`}>See Item</Link>
         </div>
+          <div>
+          <div className="Products">
+            { products.map((product) => <ProductCard key={product.productId} product={product} />) }
+          </div>
+          </div>
       </div>
     );
   }
