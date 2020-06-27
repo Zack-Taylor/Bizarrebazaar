@@ -1,10 +1,9 @@
 import React from 'react';
 import productData from '../../../helpers/data/productData';
 import ProductCard from '../ProductCard/ProductCard';
-// import productTypeData from '../../../helpers/data/productTypeData';
-// import userData from '../../../helpers/data/userData';
 
 import './SearchBox.scss';
+
 
 class SearchBox extends React.Component {
     state={
@@ -13,14 +12,21 @@ class SearchBox extends React.Component {
 
     componentDidMount() {
       this.getProducts();
+      this.getAllProducts();
     }
 
     getProducts = () => {
       productData.getSearchProduct()
         .then((products) => this.setState({ products }))
-        .catch((err) => console.error('error in get all products', err));
+        .catch((err) => console.error('error in get search products', err));
     }
 
+    getAllProducts = () => {
+      productData.getAllProducts()
+        .then((products) => this.setState({ products }))
+        .catch((err) => console.error('error in get search products', err));
+    }
+  
     filterItems = (e) => {
       const input = e.target.value;
       //   console.log('search value', input);
@@ -31,9 +37,18 @@ class SearchBox extends React.Component {
       }
     };
 
+    goToProductDetails = (reason, e) => {
+      e.preventDefault();
+      console.log(reason, e);
+    }
+
     render() {
+      const {
+        products,
+      } = this.state;
       return (
-    <div>
+    <div className='searchPage'>
+      <h1 className='productTitle'>Products</h1>
         <div className='searchboxDiv'>
             <input
             type='text'
@@ -42,13 +57,11 @@ class SearchBox extends React.Component {
             onChange= {this.filterItems}
             />
         </div>
-        <div>
+       
         <div className="looks container-fluid d-flex flex-wrap">
-            {this.state.products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+        {products == null ? [] : products.map((product) => <ProductCard key={product.id} product={product} />) }
           </div>
-        </div>
+  
     </div>
       );
     }

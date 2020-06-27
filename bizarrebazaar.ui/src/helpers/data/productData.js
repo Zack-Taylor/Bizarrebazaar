@@ -25,16 +25,31 @@ const topTwentyNewest = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getSearchProduct = (name) => new Promise((resolve, reject) => {
+  axios.get(`${constants.baseUrl}/product/searchProduct/${name}`)
+    .then((result) => resolve(result.data))
+    .catch((error) => reject(error));
+});
+
 const shopTopThree = (productTypeId) => new Promise((resolve, reject) => {
   axios.get(`${constants.baseUrl}/product/topthree/${productTypeId}`)
     .then((response) => resolve(response))
     .catch((error) => reject(error));
 });
 
+const getAllProducts = () => new Promise((resolve, reject) => {
+  axios.get(`${constants.baseUrl}/product/`)
+    .then((result) => resolve(result.data))
+    .catch((error) => reject(error));
+});
+
+
 export default {
   getProductById,
   getProductsByCategory,
   topTwentyNewest,
   getProductsByUser,
+  getSearchProduct,
   shopTopThree,
+  getAllProducts,
 };

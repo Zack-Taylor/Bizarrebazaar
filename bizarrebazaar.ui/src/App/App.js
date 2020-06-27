@@ -65,7 +65,6 @@ class App extends React.Component {
       <div>
         <Router>
           <MyNavbar authed={authed} internalUserId={internalUser?.id} />
-          <SearchBox />
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
             <Route
@@ -82,6 +81,7 @@ class App extends React.Component {
             <PrivateRoute path="/userProfile/:id" exact component={UserProfile} authed={authed} userObj={internalUser} />
             <Route path="/product/:productId" exact component={ProductDetail} authed={authed}/>
             <Route path="/shop" exact component={Shop} authed={authed}/>
+            <Route path="/search" exact component={SearchBox} authed={authed}/>
           </Switch>
         </Router>
       </div>
