@@ -115,6 +115,18 @@ namespace BizarreBazaar.DataAccess
             }
         }
 
+        public IEnumerable<Product> GetTopThree(int productTypeId)
+        {
+            var sql = @"select top(3) *
+                        from product
+                        where productTypeid = @productTypeId and isactive = 1";
+
+            var parameters = new { ProductTypeId = productTypeId };
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Product>(sql, parameters);                 
+            }
+        }
 
     }
 }
