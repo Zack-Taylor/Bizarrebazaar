@@ -17,6 +17,7 @@ import SellerStore from '../components/pages/SellerStore/SellerStore';
 import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import ProductsByCategory from '../components/pages/ProductsByCategory/ProductsByCategory';
 import userData from '../helpers/data/userData';
+import SearchBox from '../components/shared/SearchBox/SearchBox';
 import './App.scss';
 
 firebaseConnection();
@@ -64,6 +65,7 @@ class App extends React.Component {
       <div>
         <Router>
           <MyNavbar authed={authed} internalUserId={internalUser?.id} />
+          <SearchBox />
           <Switch>
             <Route path="/home" exact component={Home} authed={authed}/>
             <Route
