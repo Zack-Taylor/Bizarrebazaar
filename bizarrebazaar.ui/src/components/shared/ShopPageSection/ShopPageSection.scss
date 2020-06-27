@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+.shop-section-container {
+    margin: 2em;
+}
+
+.shop-category-name {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 4.5em;
+    margin-bottom: -0.19em;
+    margin-left: 0.1em;
+}
+
+.shop-product-section {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: 3em;
+}
+
+.icon-section {
+    display: inline-block;
+    position: relative;
+    width: 4.8em;
+    height: 30em;
+    margin: 1em;
+}
+
+.view-all-products-icon {
+    font-size: 5em;
+    margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.view-all-products-icon:hover {
+    cursor: pointer;
+    color: #00478f
+}

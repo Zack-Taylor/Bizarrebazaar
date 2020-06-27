@@ -7,4 +7,10 @@ const getProductTypeById = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getProductTypeById };
+const getAllProductTypes = () => new Promise((resolve, reject) => {
+  axios.get(`${constants.baseUrl}/producttype`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+export default { getProductTypeById, getAllProductTypes };
